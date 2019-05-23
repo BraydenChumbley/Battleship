@@ -32,8 +32,4 @@ public final class Window extends JFrame{
 	game.start();
     }
     
-    public Graphics getGraphics(){
-	return null;
-    }
-    
 }
