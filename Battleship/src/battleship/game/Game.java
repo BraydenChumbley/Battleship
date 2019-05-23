@@ -5,11 +5,13 @@
  */
 package battleship.game;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author Brayden Chumbley
  */
-public class Game implements Runnable {
+public class Game extends JPanel implements Runnable {
     
     public Game(){
 	
