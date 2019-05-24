@@ -21,7 +21,7 @@ import javax.swing.JPanel;
  */
 public class Game extends JPanel implements Runnable {
 
-    public static final int WIDTH = 500, HEIGHT = 500;
+    public static final int WIDTH = 1280, HEIGHT = 720;
 
     private final Window window;
     private UIManager UI;
