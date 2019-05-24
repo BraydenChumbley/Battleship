@@ -5,22 +5,28 @@
  */
 package battleship.game;
 
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferStrategy;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Brayden Chumbley
  */
-public class Game extends Canvas implements Runnable {
+public class Game extends JPanel implements Runnable {
 
     public static final int WIDTH = 500, HEIGHT = 500;
 
     private final Window window;
+    private UIManager UI;
+
+    JButton btn;
 
     private Thread thread;
     private boolean running = false;
@@ -28,7 +34,25 @@ public class Game extends Canvas implements Runnable {
     private double runTime = 0;
 
     public Game() {
+	
+	UI = new UIManager();
+	
+	init();
+	
 	window = new Window(WIDTH, HEIGHT, "Battleship", this);
+    }
+
+    private void init() {
+	setBackground(Color.BLACK);
+	setLayout(null);
+	btn = new Button("Button", 20, 20, 300, 50);
+	btn.addActionListener(new ActionListener(){
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+		System.out.println("Button clicked");
+	    }
+	});
+	UI.addUIComp(btn, this);
     }
 
     public synchronized void start() {
@@ -48,7 +72,7 @@ public class Game extends Canvas implements Runnable {
 
     @Override
     public void run() {
-	this.requestFocus();
+	requestFocus();
 	running = true;
 	boolean render = false;
 	double firstTime = 0;
@@ -62,7 +86,7 @@ public class Game extends Canvas implements Runnable {
 
 	while (running) {
 	    render = false;
-
+	    
 	    firstTime = System.nanoTime() / 1000000000.0;
 	    passedTime = firstTime - lastTime;
 	    lastTime = firstTime;
@@ -85,7 +109,7 @@ public class Game extends Canvas implements Runnable {
 	    }
 
 	    if (render) {
-		render();
+		repaint();
 		frames++;
 	    } else {
 		try {
@@ -97,30 +121,30 @@ public class Game extends Canvas implements Runnable {
 	}
 	stop();
     }
-    
+
+    double x = 0;
+
     private void update(float dt) {
 	//Update game logic here
+	x += .5;
     }
 
-    private void render() {
-	BufferStrategy bs = this.getBufferStrategy();
-	if (bs == null) {
-	    this.createBufferStrategy(2);
-	    return;
-	}
+    private void draw(Graphics g) {
 
-	Graphics g = bs.getDrawGraphics();
-	
-	//Draws background as black. DONT DRAW ANYTHING ABOVE THESE LINES!!!
-	g.setColor(Color.BLACK);
-	g.fillRect(0, 0, WIDTH, HEIGHT);
+	Graphics2D g2D = (Graphics2D) g;
 	
 	//Drawing begins
-	
+	g.setColor(Color.RED);
+	g.fillRect((int) x, 10, 10, 10);
 	//Drawing ends
 	
-	g.dispose();
-	bs.show();
+	UI.drawUI();
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+	super.paintComponent(g);
+	draw(g);
     }
 
     public static void main(String[] args) {
