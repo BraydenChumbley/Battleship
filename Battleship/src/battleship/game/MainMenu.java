@@ -18,16 +18,16 @@ import javax.swing.JPanel;
  *
  * @author tonyy
  */
-public class Menu extends JPanel {
+public class MainMenu extends JPanel {
     
     private BufferedImage background;
 
-    public Menu() {
+    public MainMenu() {
         try {
             background = ImageIO.read(new File("res\\gfx\\menubackground.png"));
             setBounds(0,0,Game.WIDTH,Game.HEIGHT);
         } catch (IOException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

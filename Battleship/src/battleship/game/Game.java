@@ -52,7 +52,7 @@ public class Game extends JPanel implements Runnable {
 		System.out.println("Button clicked");
 	    }
 	});
-	JPanel menu = new Menu();
+	JPanel menu = new MainMenu();
 	UI.addUIComp(menu, this);
     }
 
