@@ -24,7 +24,7 @@ public class Menu extends JPanel {
 
     public Menu() {
         try {
-            background = ImageIO.read(new File("src\\battleship\\pic\\menu.png"));
+            background = ImageIO.read(new File("res\\gfx\\menubackground.png"));
             setBounds(0,0,Game.WIDTH,Game.HEIGHT);
         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
