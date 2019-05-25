@@ -12,9 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -37,131 +35,121 @@ public class Game extends JPanel implements Runnable {
 
     public Game() {
 
-        UI = new UIManager();
+	UI = new UIManager();
 
-        init();
+	init();
 
-        window = new Window(WIDTH, HEIGHT, "Battleship", this);
+	window = new Window(WIDTH, HEIGHT, "Battleship", this);
     }
 
     private void init() {
-
-        //ImageIcon ii = new ImageIcon("C:/icon.jpg");
-        //JLabel lable = new JLabel(ii);
-        // jsp = new JScrollPane(lable);
-//        frame.getContentPane().add(jsp);
-//        frame.setSize(1000, 700);
-
-       // ImageIcon menuPic = new ImageIcon("src\\battleship\\pic.png");
-     //   JLabel menuLabel = new JLabel(menuPic);
-        setBackground(Color.BLACK);
-        setLayout(null);
-        btn = new Button("Button", 20, 20, 300, 50);
-        btn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Button clicked");
-            }
-        });
-     //   UI.addUIComp(btn, this);
-     JPanel menu = new Menu();
-     UI.addUIComp(menu, this);
+	setBackground(Color.BLACK);
+	setLayout(null);
+	btn = new Button("Button", 20, 20, 300, 50);
+	btn.addActionListener(new ActionListener() {
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+		System.out.println("Button clicked");
+	    }
+	});
+	JPanel menu = new Menu();
+	UI.addUIComp(menu, this);
     }
 
     public synchronized void start() {
-        thread = new Thread(this);
-        thread.start();
-        running = true;
+	thread = new Thread(this);
+	thread.start();
+	running = true;
     }
 
     public synchronized void stop() {
-        try {
-            thread.join();
-            running = false;
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        }
+	try {
+	    thread.join();
+	    running = false;
+	} catch (InterruptedException ex) {
+	    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+	}
     }
 
     @Override
     public void run() {
-        requestFocus();
-        running = true;
-        boolean render = false;
-        double firstTime = 0;
-        double lastTime = System.nanoTime() / 1000000000.0;
-        double passedTime = 0;
-        double unprocessedTime = 0;
+	requestFocus();
+	running = true;
+	boolean render = false;
+	double firstTime = 0;
+	double lastTime = System.nanoTime() / 1000000000.0;
+	double passedTime = 0;
+	double unprocessedTime = 0;
 
-        double frameTime = 0;
-        int frames = 0;
-        int fps = 0;
+	double frameTime = 0;
+	int frames = 0;
+	int fps = 0;
 
-        while (running) {
-            render = false;
+	while (running) {
+	    render = false;
 
-            firstTime = System.nanoTime() / 1000000000.0;
-            passedTime = firstTime - lastTime;
-            lastTime = firstTime;
+	    firstTime = System.nanoTime() / 1000000000.0;
+	    passedTime = firstTime - lastTime;
+	    lastTime = firstTime;
 
-            unprocessedTime += passedTime;
-            frameTime += passedTime;
-            while (unprocessedTime >= UPDATE_CAP) {
-                unprocessedTime -= UPDATE_CAP;
-                render = true;
+	    unprocessedTime += passedTime;
+	    frameTime += passedTime;
+	    while (unprocessedTime >= UPDATE_CAP) {
+		unprocessedTime -= UPDATE_CAP;
+		render = true;
 
-                update((float) UPDATE_CAP);
-                //Input update goes here in.update()
+		update((float) UPDATE_CAP);
+		//Input update goes here in.update()
 
-                if (frameTime >= 1.0) {
-                    frameTime = 0;
-                    fps = frames;
-                    frames = 0;
-                    System.out.println("FPS: " + fps);
-                }
-            }
+		if (frameTime >= 1.0) {
+		    frameTime = 0;
+		    fps = frames;
+		    frames = 0;
+		    System.out.println("FPS: " + fps);
+		}
+	    }
 
-            if (render) {
-                repaint();
-                frames++;
-            } else {
-                try {
-                    Thread.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        stop();
+	    if (render) {
+		repaint();
+		frames++;
+	    } else {
+		try {
+		    Thread.sleep(1);
+		} catch (InterruptedException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+	stop();
     }
 
     double x = 0;
 
     private void update(float dt) {
-        //Update game logic here
-        x += .5;
+	//Update game logic here
+	x += .5;
     }
 
     private void draw(Graphics g) {
 
-        Graphics2D g2D = (Graphics2D) g;
+	Graphics2D g2D = (Graphics2D) g;
 
-        //Drawing begins
-        g.setColor(Color.RED);
-        g.fillRect((int) x, 10, 10, 10);
-        //Drawing ends
+	//Drawing begins
+	g.setColor(Color.RED);
+	g.fillRect((int) x, 10, 10, 10);
+	//Drawing ends
 
-        UI.drawUI();
+	UI.drawUI();
     }
 
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        draw(g);
+	super.paintComponent(g);
+	draw(g);
     }
 
     public static void main(String[] args) {
-        new Game();
+	new Game();
     }
 
 }
