@@ -1,5 +1,6 @@
 package battleship.server;
 
+import battleship.game.Game;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -12,7 +13,10 @@ import java.util.logging.Logger;
  *
  * @author Brayden Chumbley
  */
-public class ServerGameController {
+public class ServerGameController implements Runnable {
+
+    private Thread thread;
+    private boolean running;
 
     private final ServerSocket ss;
     private final Server server;
@@ -23,35 +27,51 @@ public class ServerGameController {
 	ss = new ServerSocket(port, 1, InetAddress.getLocalHost());
 	clients = new Socket[2];
 	this.server = server;
+	server.logEvent("SERVER_CREATED", "Server created at " + ss.getInetAddress() + ":" + ss.getLocalPort());
     }
 
-    public void startGame() {
-	clients[0] = connectClient();
-	clients[1] = connectClient();
-	runGame();
+    public synchronized void start() {
+	thread = new Thread(this);
+	thread.start();
+	running = true;
     }
 
-    public void stopGame() {
-	
+    public synchronized void stop() {
+	try {
+	    thread.join();
+	    running = false;
+	} catch (InterruptedException ex) {
+	    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+	}
     }
 
-    public Socket connectClient() {
-	boolean clientConnected = false;
-	Socket s = null;
-	while (!clientConnected) {
-	    clientConnected = true;
+    public Socket connectClient() throws IOException {
+	server.logEvent("AWAITING_CONNECTION", "Server is waiting for client connection at " + ss.getInetAddress() + ":" + ss.getLocalPort());
+	Socket s = ss.accept();
+	s.setSoTimeout(1);
+	server.logEvent("CONNECTION_AQUIRED", "A client has connected! " + s.getInetAddress() + ":" + s.getLocalPort());
+	return s;
+    }
+
+    @Override
+    public void run() {
+	boolean serverFull = false;
+	while(!serverFull){
 	    try {
-		s = ss.accept();
-		clientConnected = true;
+		if(clients[0] == null){
+		    clients[0] = connectClient();
+		}
+		else if(clients[1] == null){
+		    clients[1] = connectClient();
+		}
+		else{
+		    serverFull = true;
+		}
 	    } catch (IOException ex) {
 		Logger.getLogger(ServerGameController.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	}
-	return s;
-    }
-
-    private void runGame() {
-	stopGame();
+	stop();
     }
 
 }

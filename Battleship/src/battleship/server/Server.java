@@ -5,6 +5,10 @@
  */
 package battleship.server;
 
+import java.io.IOException;
+import java.net.BindException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 
 /**
@@ -12,10 +16,9 @@ import javax.swing.UIManager;
  * @author bchum
  */
 public class Server extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Server
-     */
+    
+    private ServerGameController gameController;
+    
     public Server() {
 	initComponents();
     }
@@ -48,8 +51,18 @@ public class Server extends javax.swing.JFrame {
         jLabel2.setText("Server Options");
 
         jButton1.setText("Start Server");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Stop Server");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Port:");
 
@@ -141,6 +154,22 @@ public class Server extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+	try {
+	    gameController = new ServerGameController(6606, this);
+	    gameController.start();
+	} catch (BindException ex) {
+	    logEvent("ERROR", "Server is already running");
+	    Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+	} catch (IOException ex) {
+	    Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+	}
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+	//gameController.stop();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
