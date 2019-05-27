@@ -56,15 +56,13 @@ public class ServerGameController implements Runnable {
     @Override
     public void run() {
 	boolean serverFull = false;
-	while(!serverFull){
+	while (!serverFull) {
 	    try {
-		if(clients[0] == null){
+		if (clients[0] == null) {
 		    clients[0] = connectClient();
-		}
-		else if(clients[1] == null){
+		} else if (clients[1] == null) {
 		    clients[1] = connectClient();
-		}
-		else{
+		} else {
 		    serverFull = true;
 		}
 	    } catch (IOException ex) {

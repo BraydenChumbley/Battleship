@@ -26,8 +26,6 @@ public class Game extends JPanel implements Runnable {
     private final Window window;
     private UIManager UI;
 
-    JButton btn;
-
     private Thread thread;
     private boolean running = false;
     private final double UPDATE_CAP = 1.0 / 60.0;
@@ -45,13 +43,6 @@ public class Game extends JPanel implements Runnable {
     private void init() {
 	setBackground(Color.BLACK);
 	setLayout(null);
-	btn = new Button("Button", 20, 20, 300, 50);
-	btn.addActionListener(new ActionListener() {
-	    @Override
-	    public void actionPerformed(ActionEvent e) {
-		System.out.println("Button clicked");
-	    }
-	});
 	JPanel menu = new MainMenu();
 	UI.addUIComp(menu, this);
     }
