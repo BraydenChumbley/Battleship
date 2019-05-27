@@ -37,12 +37,11 @@ public class Server extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        serverLogArea = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ServerManager");
-        setPreferredSize(new java.awt.Dimension(800, 400));
         setResizable(false);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -94,10 +93,10 @@ public class Server extends javax.swing.JFrame {
         jScrollPane2.setToolTipText("");
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        serverLogArea.setEditable(false);
+        serverLogArea.setColumns(20);
+        serverLogArea.setRows(5);
+        jScrollPane2.setViewportView(serverLogArea);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Server Log:");
@@ -168,9 +167,16 @@ public class Server extends javax.swing.JFrame {
 	/* Create and display the form */
 	java.awt.EventQueue.invokeLater(new Runnable() {
 	    public void run() {
-		new Server().setVisible(true);
+		Server s = new Server();
+		s.setVisible(true);
 	    }
 	});
+    }
+    
+    private void logEvent(String evntTitle, String message){
+	String txt = serverLogArea.getText();
+	txt += "[" + evntTitle + "]: " + message + "\n";
+	serverLogArea.setText(txt);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -182,7 +188,7 @@ public class Server extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextArea serverLogArea;
     // End of variables declaration//GEN-END:variables
 }
