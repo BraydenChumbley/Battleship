@@ -173,7 +173,7 @@ public class Server extends javax.swing.JFrame {
 	});
     }
     
-    private void logEvent(String evntTitle, String message){
+    public void logEvent(String evntTitle, String message){
 	String txt = serverLogArea.getText();
 	txt += "[" + evntTitle + "]: " + message + "\n";
 	serverLogArea.setText(txt);
