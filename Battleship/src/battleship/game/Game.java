@@ -53,7 +53,7 @@ public class Game extends JPanel implements Runnable {
 	    }
 	});
 	JPanel menu = new MainMenu();
-	UI.addUIComp(menu, this);
+	//UI.addUIComp(menu, this);
     }
 
     public synchronized void start() {
@@ -139,7 +139,7 @@ public class Game extends JPanel implements Runnable {
 	g.fillRect((int) x, 10, 10, 10);
 	//Drawing ends
 
-	UI.drawUI();
+	//UI.drawUI();
     }
 
     @Override
