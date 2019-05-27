@@ -5,6 +5,10 @@
  */
 package battleship.server;
 
+import java.io.IOException;
+import java.net.BindException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 
 /**
@@ -12,10 +16,9 @@ import javax.swing.UIManager;
  * @author bchum
  */
 public class Server extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Server
-     */
+    
+    private ServerGameController gameController;
+    
     public Server() {
 	initComponents();
     }
@@ -37,20 +40,29 @@ public class Server extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        serverLogArea = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ServerManager");
-        setPreferredSize(new java.awt.Dimension(800, 400));
         setResizable(false);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Server Options");
 
         jButton1.setText("Start Server");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Stop Server");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Port:");
 
@@ -94,10 +106,10 @@ public class Server extends javax.swing.JFrame {
         jScrollPane2.setToolTipText("");
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        serverLogArea.setEditable(false);
+        serverLogArea.setColumns(20);
+        serverLogArea.setRows(5);
+        jScrollPane2.setViewportView(serverLogArea);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Server Log:");
@@ -143,6 +155,22 @@ public class Server extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+	try {
+	    gameController = new ServerGameController(6606, this);
+	    gameController.start();
+	} catch (BindException ex) {
+	    logEvent("ERROR", "Server is already running");
+	    Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+	} catch (IOException ex) {
+	    Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+	}
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+	//gameController.stop();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -168,9 +196,16 @@ public class Server extends javax.swing.JFrame {
 	/* Create and display the form */
 	java.awt.EventQueue.invokeLater(new Runnable() {
 	    public void run() {
-		new Server().setVisible(true);
+		Server s = new Server();
+		s.setVisible(true);
 	    }
 	});
+    }
+    
+    public void logEvent(String evntTitle, String message){
+	String txt = serverLogArea.getText();
+	txt += "[" + evntTitle + "]: " + message + "\n";
+	serverLogArea.setText(txt);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -182,7 +217,7 @@ public class Server extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextArea serverLogArea;
     // End of variables declaration//GEN-END:variables
 }
