@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -23,15 +24,23 @@ import javax.swing.JPanel;
  * @author tonyy
  */
 public class MainMenu extends JPanel {
+   
+    AudioClip audio = new AudioClip("res\\audio\\song.wav");
+    
+    
     
     private Image background;
 
     public MainMenu() {
+        audio.play();
+        audio.stop();
         try {
             init();
+            
         } catch (IOException ex) {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
     
     private void init() throws IOException{
