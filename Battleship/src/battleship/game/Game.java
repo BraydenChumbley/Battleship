@@ -52,7 +52,7 @@ public class Game extends JPanel implements Runnable {
 		System.out.println("Button clicked");
 	    }
 	});
-	JPanel menu = new MainMenu();
+	JPanel menu = new JoinGameMenu();
 	UI.addUIComp(menu, this);
     }
 
@@ -123,11 +123,8 @@ public class Game extends JPanel implements Runnable {
 	stop();
     }
 
-    double x = 0;
-
     private void update(float dt) {
 	//Update game logic here
-	x += .5;
     }
 
     private void draw(Graphics g) {
@@ -135,8 +132,7 @@ public class Game extends JPanel implements Runnable {
 	Graphics2D g2D = (Graphics2D) g;
 
 	//Drawing begins
-	g.setColor(Color.RED);
-	g.fillRect((int) x, 10, 10, 10);
+	
 	//Drawing ends
 
 	UI.drawUI();
