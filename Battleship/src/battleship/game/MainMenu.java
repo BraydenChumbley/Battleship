@@ -16,9 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -27,22 +24,16 @@ import javax.swing.JPanel;
  * @author tonyy
  */
 public class MainMenu extends JPanel {
-/*
-    public void playSound() {
-    try {
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("res\\audio\\song.wav").getAbsoluteFile());
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioInputStream);
-        clip.start();
-    } catch(Exception ex) {
-        System.out.println("Error with playing sound.");
-        ex.printStackTrace();
-    }
-}
-    */   
+   
+    AudioClip audio = new AudioClip("res\\audio\\song.wav");
+    
+    
+    
     private Image background;
 
     public MainMenu() {
+        audio.play();
+        audio.stop();
         try {
             init();
             
