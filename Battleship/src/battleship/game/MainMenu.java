@@ -60,7 +60,7 @@ public class MainMenu extends JPanel {
 	play.addActionListener(new ActionListener(){
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
-		System.out.println("Play");
+		Game.setGameState(GAME_STATE.JOIN_MENU);
 	    }
 	});
 	
