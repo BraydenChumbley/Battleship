@@ -30,6 +30,7 @@ public class InputField extends JTextField {
     
     @Override
     protected void paintComponent(Graphics g) {
+	super.paintComponent(g);
 	g.setColor(Color.BLACK);
 	Rectangle bounds = this.getBounds();
 	g.fillRect(0, 0, (int) bounds.getWidth(), (int) bounds.getHeight());

@@ -127,6 +127,7 @@ public class Game extends JPanel implements Runnable {
 	    remove(contentPanel);
 	    contentPanel = GAMESTATE.getPanel();
 	    add(contentPanel);
+	    STATE_SWITCHED = false;
 	}
     }
 

@@ -1,6 +1,6 @@
 package battleship.game;
 
-import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 /**
  *
