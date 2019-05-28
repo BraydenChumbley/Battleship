@@ -136,7 +136,6 @@ public class Game extends JPanel implements Runnable {
 
 	//Drawing begins
 	//Drawing ends
-
 	contentPanel.repaint();
     }
 
