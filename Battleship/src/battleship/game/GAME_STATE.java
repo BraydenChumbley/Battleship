@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 
 public enum GAME_STATE {
     
-    MAIN_MENU(new MainMenu()), JOIN_MENU(new JPanel()), OPTIONS_MENU(new JPanel()), CREDITS_MENU(new JPanel()), GAME(new JPanel());
+    MAIN_MENU(new MainMenu()), JOIN_MENU(new JoinGameMenu()), OPTIONS_MENU(new JPanel()), CREDITS_MENU(new JPanel()), GAME(new JPanel());
     
     private final JPanel panel;
     
