@@ -16,7 +16,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -53,7 +55,15 @@ public class MainMenu extends JPanel {
 	btnPanel.setBounds(100, 0, 300, Game.HEIGHT);
 	btnPanel.setBackground(new Color(50, 50, 50, 200));
 	addButtons(btnPanel);
+        
+        ImageIcon titleImage = new ImageIcon(ImageIO.read(new File("res\\gfx\\title.png")).getScaledInstance(300, 150, Image.SCALE_FAST)); 
+        JLabel titleLbl = new JLabel();
+        titleLbl.setBounds(0,0,300,150);
+        titleLbl.setIcon(titleImage);
+        btnPanel.add(titleLbl);
+        
 	add(btnPanel);
+        
 	
     }
     
