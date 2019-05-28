@@ -22,8 +22,12 @@ import javax.swing.JPanel;
 public class Game extends JPanel implements Runnable {
 
     public static final int WIDTH = 1280, HEIGHT = 720;
+    
+    public static GAME_STATE GAMESTATE = GAME_STATE.MAIN_MENU;
+    private static boolean STATE_SWITCHED = false;
 
     private final Window window;
+    private JPanel contentPanel;
     private UIManager UI;
 
     JButton btn;
@@ -45,15 +49,9 @@ public class Game extends JPanel implements Runnable {
     private void init() {
 	setBackground(Color.BLACK);
 	setLayout(null);
-	btn = new Button("Button", 20, 20, 300, 50);
-	btn.addActionListener(new ActionListener() {
-	    @Override
-	    public void actionPerformed(ActionEvent e) {
-		System.out.println("Button clicked");
-	    }
-	});
-	JPanel menu = new JoinGameMenu();
-	UI.addUIComp(menu, this);
+	
+	contentPanel = GAMESTATE.getPanel();
+	add(contentPanel);
     }
 
     public synchronized void start() {
@@ -125,6 +123,11 @@ public class Game extends JPanel implements Runnable {
 
     private void update(float dt) {
 	//Update game logic here
+	if(STATE_SWITCHED){
+	    remove(contentPanel);
+	    contentPanel = GAMESTATE.getPanel();
+	    add(contentPanel);
+	}
     }
 
     private void draw(Graphics g) {
@@ -132,16 +135,20 @@ public class Game extends JPanel implements Runnable {
 	Graphics2D g2D = (Graphics2D) g;
 
 	//Drawing begins
-	
 	//Drawing ends
 
-	UI.drawUI();
+	contentPanel.repaint();
     }
 
     @Override
     public void paintComponent(Graphics g) {
 	super.paintComponent(g);
 	draw(g);
+    }
+    
+    public static void setGameState(GAME_STATE newState){
+	GAMESTATE = newState;
+	STATE_SWITCHED = true;
     }
 
     public static void main(String[] args) {
