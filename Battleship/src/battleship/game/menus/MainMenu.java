@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package battleship.game;
+package battleship.game.menus;
 
+import battleship.game.AudioClip;
+import battleship.game.Button;
+import battleship.game.GAME_STATE;
+import battleship.game.Game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
