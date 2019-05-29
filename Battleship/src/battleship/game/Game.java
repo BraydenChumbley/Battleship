@@ -23,8 +23,6 @@ public class Game extends JPanel implements Runnable {
     private GameObjectHandler goHandler;
     private JPanel contentPanel;
 
-    JButton btn;
-
     private Thread thread;
     private boolean running = false;
     private final double UPDATE_CAP = 1.0 / 60.0;
@@ -122,6 +120,7 @@ public class Game extends JPanel implements Runnable {
 	    add(contentPanel);
 	    STATE_SWITCHED = false;
 	}
+	goHandler.update();
     }
 
     private void draw(Graphics g) {
@@ -129,6 +128,9 @@ public class Game extends JPanel implements Runnable {
 	Graphics2D g2D = (Graphics2D) g;
 
 	//Drawing begins
+	
+	goHandler.draw(g);
+	
 	//Drawing ends
 	contentPanel.repaint();
     }
