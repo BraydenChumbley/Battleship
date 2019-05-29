@@ -28,7 +28,6 @@ public class Game extends JPanel implements Runnable {
 
     private final Window window;
     private JPanel contentPanel;
-    private UIManager UI;
 
     JButton btn;
 
@@ -38,8 +37,6 @@ public class Game extends JPanel implements Runnable {
     private double runTime = 0;
 
     public Game() {
-
-	UI = new UIManager();
 
 	init();
 

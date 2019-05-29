@@ -1,5 +1,7 @@
 package battleship.game;
 
+import battleship.game.menus.JoinGameMenu;
+import battleship.game.menus.MainMenu;
 import javax.swing.JPanel;
 
 public enum GAME_STATE {

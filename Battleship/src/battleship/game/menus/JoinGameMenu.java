@@ -1,5 +1,7 @@
-package battleship.game;
+package battleship.game.menus;
 
+import battleship.game.Game;
+import battleship.game.InputField;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
