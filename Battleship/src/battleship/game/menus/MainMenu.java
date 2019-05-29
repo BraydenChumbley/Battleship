@@ -6,7 +6,7 @@
 package battleship.game.menus;
 
 import battleship.game.AudioClip;
-import battleship.game.Button;
+import battleship.game.uicomponents.Button;
 import battleship.game.GAME_STATE;
 import battleship.game.Game;
 import java.awt.Color;
