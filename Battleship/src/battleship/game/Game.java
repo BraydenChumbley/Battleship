@@ -128,7 +128,6 @@ public class Game extends JPanel implements Runnable {
 	Graphics2D g2D = (Graphics2D) g;
 
 	//Drawing begins
-	
 	goHandler.draw(g);
 	
 	//Drawing ends
