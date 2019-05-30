@@ -39,7 +39,7 @@ public class MainMenu extends JPanel {
 
     public MainMenu() {
         audio.play();
-        audio.stop();
+       // audio.stop(); -------------------------
         try {
             init();
             
