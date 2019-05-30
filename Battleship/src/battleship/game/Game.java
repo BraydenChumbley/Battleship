@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package battleship.game;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -22,9 +15,14 @@ import javax.swing.JPanel;
 public class Game extends JPanel implements Runnable {
 
     public static final int WIDTH = 1280, HEIGHT = 720;
+    
+    public static GAME_STATE GAMESTATE = GAME_STATE.MAIN_MENU; //MAIN_MENU
+    private static boolean STATE_SWITCHED = false;
 
     private final Window window;
-    private UIManager UI;
+
+    private GameObjectHandler goHandler;
+    private JPanel contentPanel;
 
     private Thread thread;
     private boolean running = false;
@@ -32,9 +30,13 @@ public class Game extends JPanel implements Runnable {
     private double runTime = 0;
 
     public Game() {
-
-	UI = new UIManager();
-
+	
+	goHandler = new GameObjectHandler(this);
+        for(int n = 50; n < 550; n+=50){
+            for(int z=20; z<520; z+=50){
+                goHandler.addObj(new Tile(n,z));
+            }
+    }
 	init();
 
 	window = new Window(WIDTH, HEIGHT, "Battleship", this);
@@ -42,9 +44,11 @@ public class Game extends JPanel implements Runnable {
 
     private void init() {
 	setBackground(Color.BLACK);
+        setBounds(0,0,Game.WIDTH, Game.HEIGHT);
 	setLayout(null);
-	JPanel menu = new MainMenu();
-	UI.addUIComp(menu, this);
+	
+	contentPanel = GAMESTATE.getPanel();
+	add(contentPanel);
     }
 
     public synchronized void start() {
@@ -114,11 +118,15 @@ public class Game extends JPanel implements Runnable {
 	stop();
     }
 
-    double x = 0;
-
     private void update(float dt) {
 	//Update game logic here
-	x += .5;
+	if(STATE_SWITCHED){
+	    remove(contentPanel);
+	    contentPanel = GAMESTATE.getPanel();
+	    add(contentPanel);
+	    STATE_SWITCHED = false;
+	}
+	goHandler.update();
     }
 
     private void draw(Graphics g) {
@@ -126,17 +134,21 @@ public class Game extends JPanel implements Runnable {
 	Graphics2D g2D = (Graphics2D) g;
 
 	//Drawing begins
-	g.setColor(Color.RED);
-	g.fillRect((int) x, 10, 10, 10);
+	goHandler.draw(g);
+	
 	//Drawing ends
-
-	UI.drawUI();
+	contentPanel.repaint();
     }
 
     @Override
     public void paintComponent(Graphics g) {
 	super.paintComponent(g);
 	draw(g);
+    }
+    
+    public static void setGameState(GAME_STATE newState){
+	GAMESTATE = newState;
+	STATE_SWITCHED = true;
     }
 
     public static void main(String[] args) {
