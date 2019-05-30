@@ -16,7 +16,7 @@ public class Game extends JPanel implements Runnable {
 
     public static final int WIDTH = 1280, HEIGHT = 720;
     
-    public static GAME_STATE GAMESTATE = GAME_STATE.GAME; //MAIN_MENU
+    public static GAME_STATE GAMESTATE = GAME_STATE.MAIN_MENU; //MAIN_MENU
     private static boolean STATE_SWITCHED = false;
 
     private final Window window;
