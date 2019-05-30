@@ -34,7 +34,7 @@ public class Server extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        portField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -49,6 +49,8 @@ public class Server extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Server Options");
+
+        portField.setText("6066");
 
         jButton1.setText("Start Server");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +86,7 @@ public class Server extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(portField, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -94,7 +96,7 @@ public class Server extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(portField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -157,13 +159,16 @@ public class Server extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 	try {
-	    gameController = new ServerGameController(6606, this);
+	    int port = Integer.parseInt(portField.getText());
+	    gameController = new ServerGameController(port, this);
 	    gameController.start();
 	} catch (BindException ex) {
 	    logEvent("ERROR", "Server is already running");
 	    Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
 	} catch (IOException ex) {
 	    Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+	} catch (NumberFormatException ex) {
+	    logEvent("ERROR", "Port number is invalid");
 	}
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -217,7 +222,7 @@ public class Server extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField portField;
     private javax.swing.JTextArea serverLogArea;
     // End of variables declaration//GEN-END:variables
 }
