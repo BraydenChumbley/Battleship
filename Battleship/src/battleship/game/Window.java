@@ -7,6 +7,11 @@
 package battleship.game;
 
 import java.awt.Dimension;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -15,7 +20,7 @@ import javax.swing.JFrame;
  */
 public final class Window extends JFrame{
     
-    public Window(int width, int height, String title, Game game){
+    public Window(int width, int height, String title, Game game) throws IOException{
 	setTitle(title);
 	
 	setPreferredSize(new Dimension(width, height));
@@ -27,7 +32,8 @@ public final class Window extends JFrame{
 	setLocationRelativeTo(null);
 	add(game);
 	setVisible(true);
-	
+	//setIconImage(new ImageIcon(java.awt.Toolkit.getDefaultToolkit().getClass().getResource("res\\gfx\\icon.png"));
+        setIconImage(ImageIO.read (new File("res\\gfx\\icon.png")));
 	game.start();
     }
     
