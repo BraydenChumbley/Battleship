@@ -12,10 +12,20 @@ import java.awt.Graphics;
  *
  * @author Brayden Chumbley
  */
-public interface GameObject {
+public class Ship extends AbstractGameObject {
     
-    public void update();
-    public void draw(Graphics g);
-    public Coordinate getPos();
-    public void setPos(Coordinate pos);
+    public Ship(){
+	
+    }
+
+    @Override
+    public void update() {
+	
+    }
+
+    @Override
+    public void draw(Graphics g) {
+	
+    }
+    
 }

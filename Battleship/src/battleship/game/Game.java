@@ -20,6 +20,7 @@ public class Game extends JPanel implements Runnable {
     private static boolean STATE_SWITCHED = false;
 
     private final Window window;
+    private final Input input;
 
     private GameObjectHandler goHandler;
     private JPanel contentPanel;
@@ -38,7 +39,8 @@ public class Game extends JPanel implements Runnable {
 	    }
 	}
 	init();
-
+	
+	input = new Input(this);
 	window = new Window(WIDTH, HEIGHT, "Battleship", this);
     }
 
@@ -94,7 +96,7 @@ public class Game extends JPanel implements Runnable {
 		render = true;
 
 		update((float) UPDATE_CAP);
-		//Input update goes here in.update()
+		input.update();
 
 		if (frameTime >= 1.0) {
 		    frameTime = 0;

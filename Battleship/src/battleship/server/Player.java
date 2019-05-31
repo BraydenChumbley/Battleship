@@ -4,18 +4,18 @@
  * and open the template in the editor.
  */
 
-package battleship.game;
+package battleship.server;
 
-import java.awt.Graphics;
+import battleship.game.Tile;
 
 /**
  *
  * @author Brayden Chumbley
  */
-public interface GameObject {
+public class Player {
     
-    public void update();
-    public void draw(Graphics g);
-    public Coordinate getPos();
-    public void setPos(Coordinate pos);
+    public Player(String username, Tile[][] board){
+	
+    }
+    
 }
