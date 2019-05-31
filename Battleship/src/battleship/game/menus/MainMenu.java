@@ -1,10 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Brayden Josh Tony
+ * May 27 2019
+ * This is the main menu 
  */
 package battleship.game.menus;
-
 import battleship.game.AudioClip;
 import battleship.game.uicomponents.Button;
 import battleship.game.GAME_STATE;
@@ -18,7 +17,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,19 +24,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- *
- * @author tonyy
+ * 
+ * @author toyu2550
  */
 public class MainMenu extends JPanel {
    
-    AudioClip audio = new AudioClip("res\\audio\\song.wav");
-    
-    
-    
-    private Image background;
+    AudioClip audio = new AudioClip("res\\audio\\song.wav"); //This is the menu song
+    private Image background; //menu background image
 
+    
     public MainMenu() {
-        audio.play();
+        audio.play(); //When the menu runs start playing menu music
        // audio.stop(); -------------------------
         try {
             init();
@@ -46,8 +42,8 @@ public class MainMenu extends JPanel {
         } catch (IOException ex) {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
+    
     
     private void init() throws IOException{
 	setLayout(null);
