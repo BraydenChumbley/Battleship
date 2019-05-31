@@ -20,7 +20,7 @@ public class Tile extends AbstractGameObject{
     @Override
     public void draw(Graphics g){
         g.setColor(Color.red);
-        g.drawRect((int)x,(int)y,50,50);
+        g.drawRect((int)x,(int)y,43,43);
         //g.drawImage(sprite, (int)x, (int)y, null)
     }
 }
