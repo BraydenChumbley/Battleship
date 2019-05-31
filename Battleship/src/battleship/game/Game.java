@@ -3,6 +3,7 @@ package battleship.game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -19,8 +20,8 @@ public class Game extends JPanel implements Runnable {
     public static GAME_STATE GAMESTATE = GAME_STATE.MAIN_MENU; //MAIN_MENU
     private static boolean STATE_SWITCHED = false;
 
-    private final Window window;
-    private final Input input;
+    private Window window;
+    private Input input;
 
     private GameObjectHandler goHandler;
     private JPanel contentPanel;
@@ -31,17 +32,21 @@ public class Game extends JPanel implements Runnable {
     private double runTime = 0;
 
     public Game() {
-
-	goHandler = new GameObjectHandler(this);
-	for (int n = 50; n < 550; n += 50) {
-	    for (int z = 20; z < 520; z += 50) {
-		goHandler.addObj(new Tile(n, z));
-	    }
-	}
-	init();
-	
-	input = new Input(this);
-	window = new Window(WIDTH, HEIGHT, "Battleship", this);
+        try {
+            goHandler = new GameObjectHandler(this);
+            for(int n = 50; n < 550; n+=50){
+                for(int z=20; z<520; z+=50){
+                    goHandler.addObj(new Tile(n,z));
+                }
+            }
+            init();
+            
+	    input = new Input(this);
+            window = new Window(WIDTH, HEIGHT, "Battleship", this);
+        } catch (IOException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(1);
+        }
     }
 
     private void init() {
