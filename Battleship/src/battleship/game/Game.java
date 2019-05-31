@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 public class Game extends JPanel implements Runnable {
 
     public static final int WIDTH = 1280, HEIGHT = 720;
-    
+
     public static GAME_STATE GAMESTATE = GAME_STATE.MAIN_MENU; //MAIN_MENU
     private static boolean STATE_SWITCHED = false;
 
@@ -30,13 +30,13 @@ public class Game extends JPanel implements Runnable {
     private double runTime = 0;
 
     public Game() {
-	
+
 	goHandler = new GameObjectHandler(this);
-        for(int n = 50; n < 550; n+=50){
-            for(int z=20; z<520; z+=50){
-                goHandler.addObj(new Tile(n,z));
-            }
-    }
+	for (int n = 50; n < 550; n += 50) {
+	    for (int z = 20; z < 520; z += 50) {
+		goHandler.addObj(new Tile(n, z));
+	    }
+	}
 	init();
 
 	window = new Window(WIDTH, HEIGHT, "Battleship", this);
@@ -44,9 +44,9 @@ public class Game extends JPanel implements Runnable {
 
     private void init() {
 	setBackground(Color.BLACK);
-        setBounds(0,0,Game.WIDTH, Game.HEIGHT);
+	setBounds(0, 0, Game.WIDTH, Game.HEIGHT);
 	setLayout(null);
-	
+
 	contentPanel = GAMESTATE.getPanel();
 	add(contentPanel);
     }
@@ -120,7 +120,7 @@ public class Game extends JPanel implements Runnable {
 
     private void update(float dt) {
 	//Update game logic here
-	if(STATE_SWITCHED){
+	if (STATE_SWITCHED) {
 	    remove(contentPanel);
 	    contentPanel = GAMESTATE.getPanel();
 	    add(contentPanel);
@@ -135,7 +135,7 @@ public class Game extends JPanel implements Runnable {
 
 	//Drawing begins
 	goHandler.draw(g);
-	
+
 	//Drawing ends
 	contentPanel.repaint();
     }
@@ -145,8 +145,8 @@ public class Game extends JPanel implements Runnable {
 	super.paintComponent(g);
 	draw(g);
     }
-    
-    public static void setGameState(GAME_STATE newState){
+
+    public static void setGameState(GAME_STATE newState) {
 	GAMESTATE = newState;
 	STATE_SWITCHED = true;
     }
