@@ -33,7 +33,7 @@ public final class Window extends JFrame{
 	add(game);
 	setVisible(true);
 	//setIconImage(new ImageIcon(java.awt.Toolkit.getDefaultToolkit().getClass().getResource("res\\gfx\\icon.png"));
-        setIconImage(ImageIO.read (new File("res\\gfx\\icon.png")));
+        //setIconImage(ImageIO.read (new File("res\\gfx\\icon.png")));
 	game.start();
     }
     
