@@ -125,11 +125,11 @@ public class MainMenu extends JPanel {
 	
 	
 	//Options Button
-	options = new Button("OPTIONS");
-        options.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20));
-        ((Button)options).setTextColor(Color.ORANGE);
-        ((Button)options).setOutlineColor(Color.red);
-        ((Button)options).setBackgroundColor(Color.BLACK);
+	options = new Button("OPTIONS"); //Button displays OPTIONS
+        options.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20)); //Set the font of the words
+        ((Button)options).setTextColor(Color.ORANGE); //Set the font color 
+        ((Button)options).setOutlineColor(Color.red); //Set the outline of the button
+        ((Button)options).setBackgroundColor(Color.BLACK); //Set the background of the button
 	options.setBounds(padding, p.getHeight()/4 + 125, p.getWidth()-padding*2, 40);
 	options.addActionListener(new ActionListener(){
 	    @Override
@@ -166,18 +166,18 @@ public class MainMenu extends JPanel {
         });
         
 	//Credits Button
-	credits = new Button("CREDITS");
-        credits.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20));
-        ((Button)credits).setTextColor(Color.ORANGE);
-        ((Button)credits).setOutlineColor(Color.red);
-        ((Button)credits).setBackgroundColor(Color.BLACK);
+	credits = new Button("CREDITS"); //Button displays CREDITS
+        credits.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20)); //Set the font of the words
+        ((Button)credits).setTextColor(Color.ORANGE); //Set the font color 
+        ((Button)credits).setOutlineColor(Color.red); //Set the outline of the button
+        ((Button)credits).setBackgroundColor(Color.BLACK); //Set the background of the button
 	credits.setBounds(padding, p.getHeight()/4 + 225, p.getWidth()-padding*2, 40);
 	credits.addActionListener(new ActionListener(){
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
 		System.out.println("Credits");
-                menuTheme.stop();
-                creditsTheme.play();
+                menuTheme.stop(); //The song for menu stops 
+                creditsTheme.play(); //The song for credits starts
 	    }
 	});
 	credits.addMouseListener(new MouseListener() {
@@ -209,11 +209,11 @@ public class MainMenu extends JPanel {
         });
         
 	//Quit Button
-	quit = new Button("QUIT");
-        quit.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20));
-        ((Button)quit).setTextColor(Color.ORANGE);
-        ((Button)quit).setOutlineColor(Color.red);
-        ((Button)quit).setBackgroundColor(Color.BLACK);
+	quit = new Button("QUIT"); //Button displays QUIT
+        quit.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20)); //Set the font of the words
+        ((Button)quit).setTextColor(Color.ORANGE); //Set the font color 
+        ((Button)quit).setOutlineColor(Color.red); //Set the outline of the button
+        ((Button)quit).setBackgroundColor(Color.BLACK); //Set the background of the button
 	quit.setBounds(padding, p.getHeight()/4 + 325, p.getWidth()-padding*2, 40);
 	quit.addActionListener(new ActionListener(){
 	    @Override
