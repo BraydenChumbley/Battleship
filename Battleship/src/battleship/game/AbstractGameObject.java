@@ -81,6 +81,11 @@ public class AbstractGameObject implements GameObject {
 	this.sprite = sprite;
     }
 
+    @Override
+    public String toString() {
+	return "x=" + x + ", y=" + y + ", velX=" + velX + ", velY=" + velY + ", sprite=" + sprite + '}';
+    }
+
     
     
 }

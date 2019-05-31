@@ -23,4 +23,9 @@ public class Tile extends AbstractGameObject{
         g.drawRect((int)x,(int)y,50,50);
         //g.drawImage(sprite, (int)x, (int)y, null)
     }
+
+    @Override
+    public String toString() {
+	return "Tile{" + "x=" + x + ",y=" + y + "}";
+    }
 }
