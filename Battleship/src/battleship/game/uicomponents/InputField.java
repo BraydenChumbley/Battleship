@@ -1,5 +1,6 @@
-package battleship.game;
+package battleship.game.uicomponents;
 
+import battleship.game.Utils;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;

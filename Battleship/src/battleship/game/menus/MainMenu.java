@@ -6,7 +6,7 @@
 package battleship.game.menus;
 
 import battleship.game.AudioClip;
-import battleship.game.Button;
+import battleship.game.uicomponents.Button;
 import battleship.game.GAME_STATE;
 import battleship.game.Game;
 import java.awt.Color;
@@ -90,7 +90,7 @@ public class MainMenu extends JPanel {
 	play.setBounds(padding, p.getHeight()/4 + 25, p.getWidth()-padding*2, 40);
         ((Button) play).setTextColor(Color.ORANGE);
         ((Button) play).setOutlineColor(Color.red);
-        ((Button)play).setBackgroundColor(Color.BLACK);
+        ((Button)play).setBackgroundColor(Color.black);
 	play.addActionListener(new ActionListener(){
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
