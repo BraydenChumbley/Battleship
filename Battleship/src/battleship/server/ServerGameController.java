@@ -92,11 +92,11 @@ public class ServerGameController implements Runnable {
 		}
 	    }
 	    
-	    DataOutputStream p1Out = (DataOutputStream) clients[0].getOutputStream();
-	    DataInputStream p1In = (DataInputStream) clients[0].getInputStream();
+	    DataOutputStream p1Out = new DataOutputStream(clients[0].getOutputStream());
+	    DataInputStream p1In = new DataInputStream(clients[0].getInputStream());
 	    
-	    DataOutputStream p2Out = (DataOutputStream) clients[0].getOutputStream();
-	    DataInputStream p2In = (DataInputStream) clients[0].getInputStream();
+	    DataOutputStream p2Out = new DataOutputStream(clients[1].getOutputStream());
+	    DataInputStream p2In = new DataInputStream(clients[1].getInputStream());
 	    
 	    //p1Out.writeUTF(Arrays.toString(b1));
 	    //p2Out.writeUTF(Arrays.toString(b2));
