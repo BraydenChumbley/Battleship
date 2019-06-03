@@ -3,6 +3,8 @@ package battleship.game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +19,7 @@ public class Game extends JPanel implements Runnable {
 
     public static final int WIDTH = 1280, HEIGHT = 720;
     
-    public static GAME_STATE GAMESTATE = GAME_STATE.MAIN_MENU; //MAIN_MENU
+    public static GAME_STATE GAMESTATE = GAME_STATE.GAME; //MAIN_MENU
     private static boolean STATE_SWITCHED = false;
 
     private Window window;
@@ -30,15 +32,22 @@ public class Game extends JPanel implements Runnable {
     private double runTime = 0;
 
     public Game() {
+        
+//            component.addMouseListener(new MouseListener() {
+//    @Override
+//    public void mouseClicked(MouseEvent e) {
+//    }
+//});
+
+        
         try {
             goHandler = new GameObjectHandler(this);
-            for(int n = 50; n < 550; n+=50){
-                for(int z=20; z<520; z+=50){
+            for(int n = 365; n < 915; n+=50){
+                for(int z=85; z<635; z+=50){
                     goHandler.addObj(new Tile(n,z));
                 }
             }
-            init();
-            
+            init();            
             window = new Window(WIDTH, HEIGHT, "Battleship", this);
         } catch (IOException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
@@ -70,6 +79,7 @@ public class Game extends JPanel implements Runnable {
 	}
     }
 
+    
     @Override
     public void run() {
 	requestFocus();
@@ -121,6 +131,13 @@ public class Game extends JPanel implements Runnable {
 	}
 	stop();
     }
+
+    public void mouseClicked(MouseEvent e){
+        int x = e.getX();
+        int y = e.getY();
+        System.out.println("X:" + x + " Y:" + y);
+    }
+    
 
     private void update(float dt) {
 	//Update game logic here
