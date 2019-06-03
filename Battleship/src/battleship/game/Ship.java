@@ -14,8 +14,18 @@ import java.awt.Graphics;
  */
 public class Ship extends AbstractGameObject {
     
-    public Ship(){
-	
+    private int width, height;
+    
+    public Ship(Tile t, int length, boolean isXaligned){
+	if(isXaligned){
+	    width = length;
+	    height = 1;
+	}
+	else{
+	    width = 1;
+	    height = length;
+	}
+	pos = t.getPos();
     }
 
     @Override

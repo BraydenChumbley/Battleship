@@ -34,11 +34,7 @@ public class Game extends JPanel implements Runnable {
     public Game() {
         try {
             goHandler = new GameObjectHandler(this);
-            for(int n = 50; n < 550; n+=50){
-                for(int z=20; z<520; z+=50){
-                    goHandler.addObj(new Tile(n,z));
-                }
-            }
+	    
             init();
             
 	    input = new Input(this);
