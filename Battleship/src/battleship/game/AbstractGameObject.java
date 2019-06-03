@@ -13,68 +13,28 @@ import java.awt.image.BufferedImage;
  *
  * @author Brayden Chumbley
  */
-public class AbstractGameObject implements GameObject {
+public abstract class AbstractGameObject implements GameObject {
     
-    protected double x, y, velX, velY;
+    protected Coordinate pos;
     protected BufferedImage sprite;
     
     public AbstractGameObject(){
 	
     }
-    
+
     @Override
-    public void draw(Graphics g){
-	//g.drawImage(sprite, (int)x, (int)y, null);
+    public abstract void update();
+    @Override
+    public abstract void draw(Graphics g);
+
+    @Override
+    public Coordinate getPos() {
+	return pos;
     }
 
     @Override
-    public void update() {
-	this.x += velX;
-	this.y += velY;
-    }
-
-    @Override
-    public double getX() {
-	return x;
-    }
-
-    @Override
-    public void setX(double x) {
-	this.x = x;
-    }
-
-    @Override
-    public double getY() {
-	return y;
-    }
-
-    @Override
-    public void setY(double y) {
-	this.y = y;
-    }
-
-    @Override
-    public double getVelX() {
-	return velX;
-    }
-
-    @Override
-    public void setVelX(double velX) {
-	this.velX = velX;
-    }
-
-    @Override
-    public double getVelY() {
-	return velY;
-    }
-
-    @Override
-    public void setVelY(double velY) {
-	this.velY = velY;
-    }
-
-    public BufferedImage getSprite() {
-	return sprite;
+    public void setPos(Coordinate pos) {
+	this.pos = pos;
     }
 
     public void setSprite(BufferedImage sprite) {

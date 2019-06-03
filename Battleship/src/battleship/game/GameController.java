@@ -6,16 +6,20 @@
 
 package battleship.game;
 
-import java.awt.Graphics;
-
 /**
  *
  * @author Brayden Chumbley
  */
-public interface GameObject {
+public class GameController {
     
-    public void update();
-    public void draw(Graphics g);
-    public Coordinate getPos();
-    public void setPos(Coordinate pos);
+    private boolean isTurn;
+    
+    public GameController(){
+	isTurn = false;
+    }
+    
+    public void displayHit(){
+	
+    }
+    
 }
