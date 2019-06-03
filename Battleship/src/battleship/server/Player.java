@@ -6,7 +6,9 @@
 
 package battleship.server;
 
+import battleship.game.Coordinate;
 import battleship.game.Tile;
+import java.net.Socket;
 
 /**
  *
@@ -14,8 +16,14 @@ import battleship.game.Tile;
  */
 public class Player {
     
-    public Player(String username, Tile[][] board){
+    private String username;
+    
+    public Player(Socket soc, String username, Tile[][] board){
 	
+    }
+    
+    public Coordinate getGuess(){
+	return null;
     }
     
 }
