@@ -24,7 +24,7 @@ public class AbstractGameObject implements GameObject {
     
     @Override
     public void draw(Graphics g){
-	g.drawImage(sprite, (int)x, (int)y, null);
+	//g.drawImage(sprite, (int)x, (int)y, null);
     }
 
     @Override
@@ -80,7 +80,5 @@ public class AbstractGameObject implements GameObject {
     public void setSprite(BufferedImage sprite) {
 	this.sprite = sprite;
     }
-
-    
     
 }
