@@ -15,30 +15,19 @@ import java.awt.Graphics;
  */
 public class Ship extends AbstractGameObject {
     
-    private int width, height;
+    private int size;
+    private boolean xAlignedEh;
     
-    public Ship(Tile t, int length, boolean isXaligned){
-	if(isXaligned){
-	    width = length;
-	    height = 1;
-	}
-	else{
-	    width = 1;
-	    height = length;
-	}
+    public Ship(Tile t, int size, boolean xAlignedEh){
+	this.size = size;
+	this.xAlignedEh = xAlignedEh;
 	pos = t.getPos();
 	//t.setOccupiedEh(true);
     }
     
-    public Ship(Coordinate coord, int length, boolean isXaligned){
-	if(isXaligned){
-	    width = length;
-	    height = 1;
-	}
-	else{
-	    width = 1;
-	    height = length;
-	}
+    public Ship(Coordinate coord, int size, boolean xAlignedEh){
+	this.size = size;
+	this.xAlignedEh = xAlignedEh;
 	pos = coord;
 	//t.setOccupiedEh(true);
     }
@@ -51,7 +40,26 @@ public class Ship extends AbstractGameObject {
     @Override
     public void draw(Graphics g) {
 	g.setColor(Color.YELLOW);
-	g.fillRect(pos.getX(), pos.getY(), Tile.TILE_SIZE, Tile.TILE_SIZE);
+	for(int i = 0; i < size; i++){
+	    Coordinate tempCoord = new Coordinate(pos.getAbsX() + i * (xAlignedEh? 1 : 0), pos.getAbsY() + i * (xAlignedEh? 0 : 1));
+	    g.fillRect(tempCoord.getX(), tempCoord.getY(), Tile.TILE_SIZE, Tile.TILE_SIZE);
+	}
+    }
+
+    public int getSize() {
+	return size;
+    }
+
+    public void setSize(int size) {
+	this.size = size;
+    }
+
+    public boolean isxAlignedEh() {
+	return xAlignedEh;
+    }
+
+    public void setxAlignedEh(boolean xAlignedEh) {
+	this.xAlignedEh = xAlignedEh;
     }
     
 }
