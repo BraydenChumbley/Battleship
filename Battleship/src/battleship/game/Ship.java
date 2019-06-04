@@ -27,6 +27,7 @@ public class Ship extends AbstractGameObject {
 	    height = length;
 	}
 	pos = t.getPos();
+	t.setOccupiedEh(true);
     }
 
     @Override

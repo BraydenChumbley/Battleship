@@ -36,7 +36,7 @@ public class Tile extends AbstractGameObject {
 	if (game.getInput().isButtonDown(MouseEvent.BUTTON1)) {
 	    if (game.getInput().getMouseX() > pos.getX() && game.getInput().getMouseX() < pos.getX() + TILE_SIZE) {
 		if (game.getInput().getMouseY() > pos.getY() && game.getInput().getMouseY() < pos.getY() + TILE_SIZE) {
-		    System.out.println("Clicked at " + x + ":" + y);
+		    System.out.println(occupiedEh? "Hit" : "Miss");
 		}
 	    }
 	}
@@ -58,4 +58,37 @@ public class Tile extends AbstractGameObject {
     public String toString() {
 	return "Tile{" + "x=" + pos.getX() + ",y=" + pos.getY() + "}";
     }
+
+    public int getX() {
+	return x;
+    }
+
+    public void setX(int x) {
+	this.x = x;
+    }
+
+    public int getY() {
+	return y;
+    }
+
+    public void setY(int y) {
+	this.y = y;
+    }
+
+    public boolean isOccupiedEh() {
+	return occupiedEh;
+    }
+
+    public void setOccupiedEh(boolean occupiedEh) {
+	this.occupiedEh = occupiedEh;
+    }
+
+    public boolean isGuessedEh() {
+	return guessedEh;
+    }
+
+    public void setGuessedEh(boolean guessedEh) {
+	this.guessedEh = guessedEh;
+    }
+    
 }
