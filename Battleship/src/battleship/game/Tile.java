@@ -36,6 +36,7 @@ public class Tile extends AbstractGameObject {
 	if (game.getInput().isButtonDown(MouseEvent.BUTTON1)) {
 	    if (game.getInput().getMouseX() > pos.getX() && game.getInput().getMouseX() < pos.getX() + TILE_SIZE) {
 		if (game.getInput().getMouseY() > pos.getY() && game.getInput().getMouseY() < pos.getY() + TILE_SIZE) {
+		    System.out.println("Clicked " + pos.getAbsX() + ":" + pos.getAbsY());
 		    System.out.println(occupiedEh? "Hit" : "Miss");
 		}
 	    }
