@@ -18,12 +18,13 @@ import javax.swing.JPanel;
 public class Game extends JPanel implements Runnable {
 
     public static final int WIDTH = 1280, HEIGHT = 720;
-    
+
     public static GAME_STATE GAMESTATE = GAME_STATE.GAME; //MAIN_MENU
     private static boolean STATE_SWITCHED = false;
 
     private Window window;
     private Input input;
+    private GameController gc;
 
     private GameObjectHandler goHandler;
     private JPanel contentPanel;
@@ -48,6 +49,16 @@ public class Game extends JPanel implements Runnable {
             init();
             
 	    input = new Input(this);
+	    
+	    gc = new GameController(this);
+	    for(int x = 0; x < 10; x++){
+		for(int y = 0; y < 10; y++){
+		    goHandler.addObj(gc.getBoardLayout()[x][y]);
+		}
+	    }
+	    
+	    goHandler.addObj(new Ship(gc.getBoardLayout()[1][0], 1, false));
+	    
             window = new Window(WIDTH, HEIGHT, "Battleship", this);
         } catch (IOException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
@@ -147,7 +158,8 @@ public class Game extends JPanel implements Runnable {
 	    add(contentPanel);
 	    STATE_SWITCHED = false;
 	}
-	goHandler.update();
+	gc.update(this);
+	goHandler.update(this);
     }
 
     private void draw(Graphics g) {
@@ -170,6 +182,14 @@ public class Game extends JPanel implements Runnable {
     public static void setGameState(GAME_STATE newState) {
 	GAMESTATE = newState;
 	STATE_SWITCHED = true;
+    }
+    
+    public Input getInput(){
+	return input;
+    }
+    
+    public GameObjectHandler getGOHandler(){
+	return goHandler;
     }
 
     public static void main(String[] args) {

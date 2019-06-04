@@ -14,7 +14,7 @@ import java.awt.Graphics;
  */
 public interface GameObject {
     
-    public void update();
+    public void update(Game game);
     public void draw(Graphics g);
     public Coordinate getPos();
     public void setPos(Coordinate pos);

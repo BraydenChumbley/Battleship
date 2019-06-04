@@ -23,7 +23,7 @@ public abstract class AbstractGameObject implements GameObject {
     }
 
     @Override
-    public abstract void update();
+    public abstract void update(Game game);
     @Override
     public abstract void draw(Graphics g);
 

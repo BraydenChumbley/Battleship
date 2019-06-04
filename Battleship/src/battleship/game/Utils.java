@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package battleship.game;
 
 import java.awt.Font;
@@ -16,7 +15,7 @@ import java.awt.Rectangle;
  * @author Brayden Chumbley
  */
 public class Utils {
-    
+
     public static void drawCenteredString(Graphics g, String text, Rectangle rect, Font font) {
 	// Get the FontMetrics
 	FontMetrics metrics = g.getFontMetrics(font);
@@ -30,4 +29,22 @@ public class Utils {
 	g.drawString(text, x, y);
     }
     
+    /**
+     * Clamp value in between a max and minimum value
+     * @param value The value to clamp
+     * @param min The minimum value of value
+     * @param max The maximum value of value
+     * @return value clamped between min and max
+     */
+    public static int clamp(int value, int min, int max) {
+	if (value > max) {
+	    return max;
+	}
+	if (value < min) {
+	    return min;
+	} else {
+	    return value;
+	}
+    }
+
 }
