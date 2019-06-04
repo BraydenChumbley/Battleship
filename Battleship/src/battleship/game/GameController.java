@@ -30,7 +30,8 @@ public class GameController {
     }
 
     public void update(Game game) {
-	ship1.setPos(new Coordinate((game.getInput().getMouseX() / Tile.TILE_SIZE) - 1, (game.getInput().getMouseY() / Tile.TILE_SIZE) - 1));
+	ship1.setPos(Coordinate.screenToCoordinate(game.getInput().getMouseX(), game.getInput().getMouseY()));
+	//ship1.setPos(new Coordinate(game.getInput().getMouseX()/Tile.TILE_SIZE, game.getInput().getMouseY()/Tile.TILE_SIZE));
     }
     
     private void draw(Graphics g){
