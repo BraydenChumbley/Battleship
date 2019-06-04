@@ -12,14 +12,25 @@ package battleship.game;
  */
 public class GameController {
     
+    private Tile[][] board;
     private boolean isTurn;
     
     public GameController(){
 	isTurn = false;
+	board = new Tile[10][10];
+	for(int x = 0; x < 10; x++){
+	    for(int y = 0; y < 10; y++){
+		board[x][y] = new Tile(x,y);
+	    }
+	}
     }
     
     public void displayHit(){
 	
+    }
+    
+    public Tile[][] getBoardLayout(){
+	return board;
     }
     
 }

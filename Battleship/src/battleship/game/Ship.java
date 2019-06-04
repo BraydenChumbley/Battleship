@@ -6,6 +6,7 @@
 
 package battleship.game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -35,7 +36,8 @@ public class Ship extends AbstractGameObject {
 
     @Override
     public void draw(Graphics g) {
-	
+	g.setColor(Color.YELLOW);
+	g.fillRect(pos.getX(), pos.getY(), 50, 50);
     }
     
 }

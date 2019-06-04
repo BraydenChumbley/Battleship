@@ -17,7 +17,7 @@ public class Game extends JPanel implements Runnable {
 
     public static final int WIDTH = 1280, HEIGHT = 720;
 
-    public static GAME_STATE GAMESTATE = GAME_STATE.MAIN_MENU; //MAIN_MENU
+    public static GAME_STATE GAMESTATE = GAME_STATE.GAME; //MAIN_MENU
     private static boolean STATE_SWITCHED = false;
 
     private Window window;
@@ -34,6 +34,15 @@ public class Game extends JPanel implements Runnable {
     public Game() {
         try {
             goHandler = new GameObjectHandler(this);
+	    
+	    GameController gc = new GameController();
+	    for(int x = 0; x < 10; x++){
+		for(int y = 0; y < 10; y++){
+		    goHandler.addObj(gc.getBoardLayout()[x][y]);
+		}
+	    }
+	    
+	    goHandler.addObj(new Ship(gc.getBoardLayout()[1][0], 1, false));
 	    
             init();
             
