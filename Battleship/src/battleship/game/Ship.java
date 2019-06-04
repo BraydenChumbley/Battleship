@@ -30,14 +30,14 @@ public class Ship extends AbstractGameObject {
     }
 
     @Override
-    public void update() {
+    public void update(Game game) {
 	
     }
 
     @Override
     public void draw(Graphics g) {
 	g.setColor(Color.YELLOW);
-	g.fillRect(pos.getX(), pos.getY(), 50, 50);
+	g.fillRect(pos.getX(), pos.getY(), Tile.TILE_SIZE, Tile.TILE_SIZE);
     }
     
 }

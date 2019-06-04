@@ -138,7 +138,7 @@ public class Game extends JPanel implements Runnable {
 	    add(contentPanel);
 	    STATE_SWITCHED = false;
 	}
-	goHandler.update();
+	goHandler.update(this);
     }
 
     private void draw(Graphics g) {
@@ -161,6 +161,10 @@ public class Game extends JPanel implements Runnable {
     public static void setGameState(GAME_STATE newState) {
 	GAMESTATE = newState;
 	STATE_SWITCHED = true;
+    }
+    
+    public Input getInput(){
+	return input;
     }
 
     public static void main(String[] args) {

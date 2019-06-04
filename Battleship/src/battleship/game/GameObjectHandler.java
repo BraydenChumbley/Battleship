@@ -22,9 +22,9 @@ public class GameObjectHandler {
 	objects = new ArrayList<>();
     }
 
-    public void update() {
+    public void update(Game game) {
 	for(int i = 0; i < objects.size(); i++){
-	    objects.get(i).update();
+	    objects.get(i).update(game);
 	}
     }
 

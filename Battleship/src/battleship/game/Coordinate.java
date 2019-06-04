@@ -15,8 +15,8 @@ public class Coordinate implements Comparable<Coordinate> {
 
     public Coordinate(int x, int y) {
 	super();
-	this.x = x * 50 + 50;
-	this.y = y * 50;
+	this.x = x * Tile.TILE_SIZE + 50;
+	this.y = y * Tile.TILE_SIZE + 50;
     }
 
     @Override
