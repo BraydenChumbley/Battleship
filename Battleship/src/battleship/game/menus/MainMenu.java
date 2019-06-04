@@ -75,7 +75,7 @@ public class MainMenu extends JPanel {
     
     public void addButtons(JPanel p){
 	
-	JButton play, options, credits, quit; //Create JButtons for all the options in menu
+	JButton play, options, credits, score, quit; //Create JButtons for all the options in menu
 	int padding = 10;
 	
 	//Play Button
@@ -208,13 +208,58 @@ public class MainMenu extends JPanel {
             }
         });
         
+        //Score Button
+        
+	score = new Button("SCORE"); //Button displays START
+        score.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 25)); //Set the font of the words
+	score.setBounds(padding, p.getHeight()/4 + 325, p.getWidth()-padding*2, 40); //Set the size of the button
+        ((Button) score).setTextColor(Color.ORANGE); //Set the font color 
+        ((Button) score).setOutlineColor(Color.red); //Set the outline of the button
+        ((Button)score).setBackgroundColor(Color.black); //Set the background of the button
+        
+	score.addActionListener(new ActionListener(){
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+		Game.setGameState(GAME_STATE.SCORE); //When the play button is clicked the Game State will change
+	    }
+	}
+        );
+        
+        score.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                ((Button)score).setBackgroundColor(Color.blue); //When the mouse is clicked the background turns blue
+                ((Button)score).setBackgroundColor(Color.BLACK); //When the mouse is clicked the background turns black immediately after it turns blue to make it look like a clicked animation
+            }
+
+            @Override
+            public void mousePressed(MouseEvent me) {
+                ((Button)score).setBackgroundColor(Color.blue); //When the mouse is pressed the background turns blue
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent me) {
+                ((Button)score).setBackgroundColor(Color.BLACK); //When the mouse is released the background turns black
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent me) {
+                ((Button)score).setOutlineColor(Color.cyan); //When the mouse is hovering over the button, the outline color of the button changes to cyan
+            }
+
+            @Override
+            public void mouseExited(MouseEvent me) {
+                ((Button)score).setOutlineColor(Color.red); //When the mouse is no longer hovering over the button, the outline color changes back to normal
+            }
+        });
+        
 	//Quit Button
 	quit = new Button("QUIT"); //Button displays QUIT
         quit.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20)); //Set the font of the words
         ((Button)quit).setTextColor(Color.ORANGE); //Set the font color 
         ((Button)quit).setOutlineColor(Color.red); //Set the outline of the button
         ((Button)quit).setBackgroundColor(Color.BLACK); //Set the background of the button
-	quit.setBounds(padding, p.getHeight()/4 + 325, p.getWidth()-padding*2, 40);
+	quit.setBounds(padding, p.getHeight()/4 + 425, p.getWidth()-padding*2, 40);
 	quit.addActionListener(new ActionListener(){
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
@@ -251,6 +296,7 @@ public class MainMenu extends JPanel {
 	p.add(play);
 	p.add(options);
 	p.add(credits);
+        p.add(score);
 	p.add(quit);
 	
     }
