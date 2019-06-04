@@ -27,7 +27,20 @@ public class Ship extends AbstractGameObject {
 	    height = length;
 	}
 	pos = t.getPos();
-	t.setOccupiedEh(true);
+	//t.setOccupiedEh(true);
+    }
+    
+    public Ship(Coordinate coord, int length, boolean isXaligned){
+	if(isXaligned){
+	    width = length;
+	    height = 1;
+	}
+	else{
+	    width = 1;
+	    height = length;
+	}
+	pos = coord;
+	//t.setOccupiedEh(true);
     }
 
     @Override

@@ -22,6 +22,7 @@ public class Game extends JPanel implements Runnable {
 
     private Window window;
     private Input input;
+    private GameController gc;
 
     private GameObjectHandler goHandler;
     private JPanel contentPanel;
@@ -35,7 +36,11 @@ public class Game extends JPanel implements Runnable {
         try {
             goHandler = new GameObjectHandler(this);
 	    
-	    GameController gc = new GameController();
+            init();
+            
+	    input = new Input(this);
+	    
+	    gc = new GameController(this);
 	    for(int x = 0; x < 10; x++){
 		for(int y = 0; y < 10; y++){
 		    goHandler.addObj(gc.getBoardLayout()[x][y]);
@@ -44,9 +49,6 @@ public class Game extends JPanel implements Runnable {
 	    
 	    goHandler.addObj(new Ship(gc.getBoardLayout()[1][0], 1, false));
 	    
-            init();
-            
-	    input = new Input(this);
             window = new Window(WIDTH, HEIGHT, "Battleship", this);
         } catch (IOException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
@@ -138,6 +140,7 @@ public class Game extends JPanel implements Runnable {
 	    add(contentPanel);
 	    STATE_SWITCHED = false;
 	}
+	gc.update(this);
 	goHandler.update(this);
     }
 
@@ -165,6 +168,10 @@ public class Game extends JPanel implements Runnable {
     
     public Input getInput(){
 	return input;
+    }
+    
+    public GameObjectHandler getGOHandler(){
+	return goHandler;
     }
 
     public static void main(String[] args) {
