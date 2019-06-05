@@ -49,13 +49,25 @@ public class Utils {
     }
 
     public static boolean placeShip(Tile[][] board, Ship s) {
+	
+	Tile[] checkedTiles = new Tile[s.getSize()];
 
 	try {
 	    
 	    for(int i = 0; i < s.getSize(); i++){
-		if(board[s.getPos().getAbsX() + (s.isxAlignedEh() ? i : 0)][s.getPos().getAbsY() + (!s.isxAlignedEh() ? i : 0)].isOccupiedEh()){
+		
+		Tile tempTile = board[s.getPos().getAbsX() + (s.isxAlignedEh() ? i : 0)][s.getPos().getAbsY() + (!s.isxAlignedEh() ? i : 0)];
+		
+		if(tempTile.isOccupiedEh()){
+		    
+		    for(int n = 0; n < i; n++){
+			checkedTiles[n].setOccupiedEh(false);
+		    }
+		    
 		    return false;
 		}
+		checkedTiles[i] = tempTile;
+		checkedTiles[i].setOccupiedEh(true);
 	    }
 	    
 	    return true;

@@ -41,9 +41,6 @@ public class GameController {
     public void update(Game game) {
 
 	if (placementPhase) {
-
-	    /*ships[placedShips].setPos(Coordinate.screenToCoordinate(game.getInput().getMouseX() + (ships[placedShips].isxAlignedEh() ? ships[placedShips].getSize() * Tile.TILE_SIZE : 0),
-		    game.getInput().getMouseX() + (ships[placedShips].isxAlignedEh() ? 0 : ships[placedShips].getSize() * Tile.TILE_SIZE)));*/
 	    
 	    ships[placedShips].setPos(Coordinate.screenToCoordinate(game.getInput().getMouseX(), game.getInput().getMouseY(), ships[placedShips].isxAlignedEh() ? ships[placedShips].getSize() - 1 : 0,
 		    ships[placedShips].isxAlignedEh() ? 0 : ships[placedShips].getSize() - 1));

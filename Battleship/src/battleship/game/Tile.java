@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
 
 public class Tile extends AbstractGameObject {
 
-    public static final int TILE_SIZE = 65;
+    public static final int TILE_SIZE = 64;
     
     private int x, y;
     private boolean occupiedEh;
@@ -50,7 +50,10 @@ public class Tile extends AbstractGameObject {
      */
     @Override
     public void draw(Graphics g) {
-	g.setColor(Color.red);
+	if(occupiedEh)
+	    g.setColor(Color.red);
+	else
+	    g.setColor(Color.green);
 	g.drawRect(pos.getX(), pos.getY(), TILE_SIZE, TILE_SIZE);
 	//g.drawImage(sprite, (int)x, (int)y, null)
     }

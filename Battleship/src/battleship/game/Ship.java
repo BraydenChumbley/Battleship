@@ -42,7 +42,7 @@ public class Ship extends AbstractGameObject {
 	g.setColor(Color.YELLOW);
 	for(int i = 0; i < size; i++){
 	    Coordinate tempCoord = new Coordinate(pos.getAbsX() + i * (xAlignedEh? 1 : 0), pos.getAbsY() + i * (xAlignedEh? 0 : 1));
-	    g.fillRect(tempCoord.getX(), tempCoord.getY(), Tile.TILE_SIZE, Tile.TILE_SIZE);
+	    g.fillRect(tempCoord.getX()+1, tempCoord.getY()+1, Tile.TILE_SIZE-2, Tile.TILE_SIZE-2);
 	}
     }
 
