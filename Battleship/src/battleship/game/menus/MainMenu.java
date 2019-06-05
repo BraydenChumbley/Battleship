@@ -4,6 +4,7 @@
  * This is the main menu 
  */
 package battleship.game.menus;
+
 import battleship.game.AudioClip;
 import battleship.game.uicomponents.Button;
 import battleship.game.GAME_STATE;
@@ -29,276 +30,227 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * 
+ *
  * @author toyu2550
  */
 public class MainMenu extends JPanel {
+
    
-    //Set a name to all the audo clips 
-    AudioClip menuTheme = new AudioClip("res\\audio\\song.wav");
-    AudioClip creditsTheme = new AudioClip("res\\audio\\credits.wav");
-    AudioClip battleTheme = new AudioClip("res\\audio\\battletheme.wav");
-    AudioClip battleSetupTheme = new AudioClip("res\\audio\\battlesetup.wav");
-    
+
     private Image background;
 
     public MainMenu() {
-        menuTheme.play(); //When the menu runs start playing menu song
+        //Game.menuTheme.play();
+
         //audio.stop();
         try {
-            init();    
+            init();
         } catch (IOException ex) {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    private void init() throws IOException{
-	setLayout(null);
-	background = ImageIO.read(new File("res\\gfx\\menubackground.png")).getScaledInstance(Game.WIDTH, Game.HEIGHT, Image.SCALE_FAST); //
-	setBounds(0, 0, Game.WIDTH, Game.HEIGHT); //Scale the background image to fit the whole screen
-	
-	JPanel btnPanel = new JPanel(); //JPanel is created for the buttons
-	btnPanel.setLayout(null);
-	btnPanel.setBounds(100, 0, 300, Game.HEIGHT); //Set the size of the JPanel
-	btnPanel.setBackground(new Color(50, 50, 50, 200)); //Set the color of the background
-	addButtons(btnPanel); //Add the buttons to JPanel
-        
-        ImageIcon titleImage = new ImageIcon(ImageIO.read(new File("res\\gfx\\title.png")).getScaledInstance(300, 90, Image.SCALE_FAST)); //Sets titleImage to the title of the image
-        JLabel titleLbl = new JLabel(); //New JLabel is created for label
-        titleLbl.setBounds(0,50,300,90); //Set the size of the label
-        titleLbl.setIcon(titleImage); //Put the image onto the label
-        btnPanel.add(titleLbl); //Add the label to the pannel
-	add(btnPanel); 
-        
-	
+
+    private void init() throws IOException {
+        setLayout(null);
+        background = ImageIO.read(new File("res\\gfx\\menubackground.png")).getScaledInstance(Game.WIDTH, Game.HEIGHT, Image.SCALE_FAST);
+        setBounds(0, 0, Game.WIDTH, Game.HEIGHT);
+
+        JPanel btnPanel = new JPanel();
+        btnPanel.setLayout(null);
+        btnPanel.setBounds(100, 0, 300, Game.HEIGHT);
+        btnPanel.setBackground(new Color(50, 50, 50, 200));
+        addButtons(btnPanel);
+
+        ImageIcon titleImage = new ImageIcon(ImageIO.read(new File("res\\gfx\\title.png")).getScaledInstance(300, 90, Image.SCALE_FAST));
+        JLabel titleLbl = new JLabel();
+        titleLbl.setBounds(0, 50, 300, 90);
+        titleLbl.setIcon(titleImage);
+        btnPanel.add(titleLbl);
+
+        add(btnPanel);
+
     }
-    
-    public void addButtons(JPanel p){
-	
-	JButton play, options, credits, score, quit; //Create JButtons for all the options in menu
-	int padding = 10;
-	
-	//Play Button
-        
-	play = new Button("START"); //Button displays START
-        play.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 25)); //Set the font of the words
-	play.setBounds(padding, p.getHeight()/4 + 25, p.getWidth()-padding*2, 40); //Set the size of the button
-        ((Button) play).setTextColor(Color.ORANGE); //Set the font color 
-        ((Button) play).setOutlineColor(Color.red); //Set the outline of the button
-        ((Button)play).setBackgroundColor(Color.black); //Set the background of the button
-        
-	play.addActionListener(new ActionListener(){
-	    @Override
-	    public void actionPerformed(ActionEvent e) {
-		Game.setGameState(GAME_STATE.JOIN_MENU); //When the play button is clicked the Game State will change
-	    }
-	}
+
+    public void addButtons(JPanel p) {
+
+        JButton play, options, credits, quit;
+        int padding = 10;
+
+        //Play Button
+        play = new Button("START");
+        play.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 25));
+        play.setBounds(padding, p.getHeight() / 4 + 25, p.getWidth() - padding * 2, 40);
+        ((Button) play).setTextColor(Color.ORANGE);
+        ((Button) play).setOutlineColor(Color.red);
+        ((Button) play).setBackgroundColor(Color.black);
+        play.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Game.setGameState(GAME_STATE.JOIN_MENU);
+            }
+
+        }
         );
-        
+
         play.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                ((Button)play).setBackgroundColor(Color.blue); //When the mouse is clicked the background turns blue
-                ((Button)play).setBackgroundColor(Color.BLACK); //When the mouse is clicked the background turns black immediately after it turns blue to make it look like a clicked animation
+                ((Button) play).setBackgroundColor(Color.blue);
+                ((Button) play).setBackgroundColor(Color.BLACK);
             }
 
             @Override
             public void mousePressed(MouseEvent me) {
-                ((Button)play).setBackgroundColor(Color.blue); //When the mouse is pressed the background turns blue
+                ((Button) play).setBackgroundColor(Color.blue);
             }
 
             @Override
             public void mouseReleased(MouseEvent me) {
-                ((Button)play).setBackgroundColor(Color.BLACK); //When the mouse is released the background turns black
+                ((Button) play).setBackgroundColor(Color.BLACK);
             }
 
             @Override
             public void mouseEntered(MouseEvent me) {
-                ((Button)play).setOutlineColor(Color.cyan); //When the mouse is hovering over the button, the outline color of the button changes to cyan
+                ((Button) play).setOutlineColor(Color.cyan);
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
-                ((Button)play).setOutlineColor(Color.red); //When the mouse is no longer hovering over the button, the outline color changes back to normal
+                ((Button) play).setOutlineColor(Color.red);
             }
         });
-	
-	
-	//Options Button
-	options = new Button("OPTIONS"); //Button displays OPTIONS
-        options.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20)); //Set the font of the words
-        ((Button)options).setTextColor(Color.ORANGE); //Set the font color 
-        ((Button)options).setOutlineColor(Color.red); //Set the outline of the button
-        ((Button)options).setBackgroundColor(Color.BLACK); //Set the background of the button
-	options.setBounds(padding, p.getHeight()/4 + 125, p.getWidth()-padding*2, 40);
-	options.addActionListener(new ActionListener(){
-	    @Override
-	    public void actionPerformed(ActionEvent e) {
-		System.out.println("Options" + options.getFont());
-	    }
-	});
+
+        //Options Button
+        options = new Button("OPTIONS");
+        options.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20));
+        ((Button) options).setTextColor(Color.ORANGE);
+        ((Button) options).setOutlineColor(Color.red);
+        ((Button) options).setBackgroundColor(Color.BLACK);
+        options.setBounds(padding, p.getHeight() / 4 + 125, p.getWidth() - padding * 2, 40);
+        options.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Options" + options.getFont());
+            }
+        });
         options.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                ((Button)options).setBackgroundColor(Color.blue); //When the mouse is clicked the background turns blue
-                ((Button)options).setBackgroundColor(Color.BLACK); //When the mouse is clicked the background turns black immediately after it turns blue to make it look like a clicked animation
+                ((Button) options).setBackgroundColor(Color.blue);
+                ((Button) options).setBackgroundColor(Color.BLACK);
             }
 
             @Override
             public void mousePressed(MouseEvent me) {
-                ((Button)options).setBackgroundColor(Color.blue); //When the mouse is pressed the background turns blue
+                ((Button) options).setBackgroundColor(Color.blue);
             }
 
             @Override
             public void mouseReleased(MouseEvent me) {
-                ((Button)options).setBackgroundColor(Color.BLACK); //When the mouse is released the background turns black
+                ((Button) options).setBackgroundColor(Color.BLACK);
             }
 
             @Override
             public void mouseEntered(MouseEvent me) {
-                ((Button)options).setOutlineColor(Color.cyan); //When the mouse is hovering over the button, the outline color of the button changes to cyan
+                ((Button) options).setOutlineColor(Color.cyan);
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
-                ((Button)options).setOutlineColor(Color.red); //When the mouse is no longer hovering over the button, the outline color changes back to normal
+                ((Button) options).setOutlineColor(Color.red);
             }
         });
-        
-	//Credits Button
-	credits = new Button("CREDITS"); //Button displays CREDITS
-        credits.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20)); //Set the font of the words
-        ((Button)credits).setTextColor(Color.ORANGE); //Set the font color 
-        ((Button)credits).setOutlineColor(Color.red); //Set the outline of the button
-        ((Button)credits).setBackgroundColor(Color.BLACK); //Set the background of the button
-	credits.setBounds(padding, p.getHeight()/4 + 225, p.getWidth()-padding*2, 40);
-	credits.addActionListener(new ActionListener(){
-	    @Override
-	    public void actionPerformed(ActionEvent e) {
-		System.out.println("Credits");
-                menuTheme.stop(); //The song for menu stops 
-                creditsTheme.play(); //The song for credits starts
-	    }
-	});
-	credits.addMouseListener(new MouseListener() {
+        //Credits Button
+
+        credits = new Button("CREDITS");
+        credits.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20));
+        ((Button) credits).setTextColor(Color.ORANGE);
+        ((Button) credits).setOutlineColor(Color.red);
+        ((Button) credits).setBackgroundColor(Color.BLACK);
+        credits.setBounds(padding, p.getHeight() / 4 + 225, p.getWidth() - padding * 2, 40);
+        credits.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Credits");
+                Game.menuTheme.stop();
+                Game.creditsTheme.play();
+                Game.setGameState(GAME_STATE.CREDITS_MENU);
+            }
+        });
+        credits.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                ((Button)credits).setBackgroundColor(Color.blue); //When the mouse is clicked the background turns blue
-                ((Button)credits).setBackgroundColor(Color.BLACK); //When the mouse is clicked the background turns black immediately after it turns blue to make it look like a clicked animation
+                ((Button) credits).setBackgroundColor(Color.blue);
+                ((Button) credits).setBackgroundColor(Color.BLACK);
             }
 
             @Override
             public void mousePressed(MouseEvent me) {
-                ((Button)credits).setBackgroundColor(Color.blue); //When the mouse is pressed the background turns blue
+                ((Button) credits).setBackgroundColor(Color.blue);
             }
 
             @Override
             public void mouseReleased(MouseEvent me) {
-                ((Button)credits).setBackgroundColor(Color.BLACK); //When the mouse is released the background turns black
+                ((Button) credits).setBackgroundColor(Color.BLACK);
             }
 
             @Override
             public void mouseEntered(MouseEvent me) {
-                ((Button)credits).setOutlineColor(Color.cyan); //When the mouse is hovering over the button, the outline color of the button changes to cyan
+                ((Button) credits).setOutlineColor(Color.cyan);
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
-                ((Button)credits).setOutlineColor(Color.red); //When the mouse is no longer hovering over the button, the outline color changes back to normal
+                ((Button) credits).setOutlineColor(Color.red);
             }
         });
         
-        //Score Button
-        
-	score = new Button("SCORE"); //Button displays START
-        score.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 25)); //Set the font of the words
-	score.setBounds(padding, p.getHeight()/4 + 325, p.getWidth()-padding*2, 40); //Set the size of the button
-        ((Button) score).setTextColor(Color.ORANGE); //Set the font color 
-        ((Button) score).setOutlineColor(Color.red); //Set the outline of the button
-        ((Button)score).setBackgroundColor(Color.black); //Set the background of the button
-        
-	score.addActionListener(new ActionListener(){
-	    @Override
-	    public void actionPerformed(ActionEvent e) {
-		Game.setGameState(GAME_STATE.SCORE); //When the play button is clicked the Game State will change
-	    }
-	}
-        );
-        
-        score.addMouseListener(new MouseListener() {
+        //Quit Button
+
+        quit = new Button("QUIT");
+        quit.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20));
+        ((Button) quit).setTextColor(Color.ORANGE);
+        ((Button) quit).setOutlineColor(Color.red);
+        ((Button) quit).setBackgroundColor(Color.BLACK);
+        quit.setBounds(padding, p.getHeight() / 4 + 325, p.getWidth() - padding * 2, 40);
+        quit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        quit.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                ((Button)score).setBackgroundColor(Color.blue); //When the mouse is clicked the background turns blue
-                ((Button)score).setBackgroundColor(Color.BLACK); //When the mouse is clicked the background turns black immediately after it turns blue to make it look like a clicked animation
+                ((Button) quit).setBackgroundColor(Color.blue);
+                ((Button) quit).setBackgroundColor(Color.BLACK);
             }
 
             @Override
             public void mousePressed(MouseEvent me) {
-                ((Button)score).setBackgroundColor(Color.blue); //When the mouse is pressed the background turns blue
+                ((Button) quit).setBackgroundColor(Color.blue);
             }
 
             @Override
             public void mouseReleased(MouseEvent me) {
-                ((Button)score).setBackgroundColor(Color.BLACK); //When the mouse is released the background turns black
+                ((Button) quit).setBackgroundColor(Color.BLACK);
             }
 
             @Override
             public void mouseEntered(MouseEvent me) {
-                ((Button)score).setOutlineColor(Color.cyan); //When the mouse is hovering over the button, the outline color of the button changes to cyan
+                ((Button) quit).setOutlineColor(Color.cyan);
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
-                ((Button)score).setOutlineColor(Color.red); //When the mouse is no longer hovering over the button, the outline color changes back to normal
+                ((Button) quit).setOutlineColor(Color.red);
             }
         });
-        
-	//Quit Button
-	quit = new Button("QUIT"); //Button displays QUIT
-        quit.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20)); //Set the font of the words
-        ((Button)quit).setTextColor(Color.ORANGE); //Set the font color 
-        ((Button)quit).setOutlineColor(Color.red); //Set the outline of the button
-        ((Button)quit).setBackgroundColor(Color.BLACK); //Set the background of the button
-	quit.setBounds(padding, p.getHeight()/4 + 425, p.getWidth()-padding*2, 40);
-	quit.addActionListener(new ActionListener(){
-	    @Override
-	    public void actionPerformed(ActionEvent e) {
-		System.exit(0);
-	    }
-	});
-	quit.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                ((Button)quit).setBackgroundColor(Color.blue); //When the mouse is clicked the background turns blue
-                ((Button)quit).setBackgroundColor(Color.BLACK); //When the mouse is clicked the background turns black immediately after it turns blue to make it look like a clicked animation
-            }
+        p.add(play);
+        p.add(options);
+        p.add(credits);
+        p.add(quit);
 
-            @Override
-            public void mousePressed(MouseEvent me) {
-                ((Button)quit).setBackgroundColor(Color.blue); //When the mouse is pressed the background turns blue
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent me) {
-                ((Button)quit).setBackgroundColor(Color.BLACK); //When the mouse is released the background turns black
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent me) {
-                ((Button)quit).setOutlineColor(Color.cyan); //When the mouse is hovering over the button, the outline color of the button changes to cyan
-            }
-
-            @Override
-            public void mouseExited(MouseEvent me) {
-                ((Button)quit).setOutlineColor(Color.red); //When the mouse is no longer hovering over the button, the outline color changes back to normal
-            }
-        });
-	p.add(play);
-	p.add(options);
-	p.add(credits);
-        p.add(score);
-	p.add(quit);
-	
     }
     
     /**
@@ -306,7 +258,7 @@ public class MainMenu extends JPanel {
      * @param g - Graphics object
      */
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(background, 0, 0, null);  //Background is being drawn    
     }
