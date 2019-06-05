@@ -9,16 +9,20 @@ import battleship.game.Utils;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JButton;
 
 /**
  *
  * @author Brayden Chumbley
  */
-public class Button extends JButton {
+public class Button extends JButton implements MouseListener {
+
     private Color outlineColor;
     private Color textColor;
     private Color backgroundColor;
+
     public Button(String text) {
 	init(text);
     }
@@ -26,24 +30,53 @@ public class Button extends JButton {
     public Button(String text, int x, int y, int width, int height) {
 	this(text);
 	setBounds(x, y, width, height);
-         
-        
+
     }
-   
+
     private void init(String text) {
 	setText(text);
 	setBounds(0, 0, 100, 30);
 	setBorderPainted(false);
     }
-    public void setTextColor(Color c){
-        this.textColor = c;
+
+    public void setTextColor(Color c) {
+	this.textColor = c;
     }
-    public void setOutlineColor(Color c){
-        this.outlineColor = c;
+
+    public void setOutlineColor(Color c) {
+	this.outlineColor = c;
     }
-    public void setBackgroundColor(Color c){
-        this.backgroundColor = c;
+
+    public void setBackgroundColor(Color c) {
+	this.backgroundColor = c;
     }
+
+    @Override
+    public void mouseClicked(MouseEvent me) {
+	setBackgroundColor(Color.blue); //When the mouse is clicked the background turns blue
+	setBackgroundColor(Color.BLACK); //When the mouse is clicked the background turns black immediately after it turns blue to make it look like a clicked animation
+    }
+
+    @Override
+    public void mousePressed(MouseEvent me) {
+	setBackgroundColor(Color.blue); //When the mouse is pressed the background turns blue
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent me) {
+	setBackgroundColor(Color.BLACK); //When the mouse is released the background turns black
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent me) {
+	setOutlineColor(Color.cyan); //When the mouse is hovering over the button, the outline color of the button changes to cyan
+    }
+
+    @Override
+    public void mouseExited(MouseEvent me) {
+	setOutlineColor(Color.red); //When the mouse is no longer hovering over the button, the outline color changes back to normal
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
 	g.setColor(backgroundColor);
@@ -51,7 +84,7 @@ public class Button extends JButton {
 	g.fillRect(0, 0, (int) bounds.getWidth(), (int) bounds.getHeight());
 
 	g.setColor(outlineColor);
-	g.drawRect(0, 0, (int) bounds.getWidth()-1, (int) bounds.getHeight()-1);
+	g.drawRect(0, 0, (int) bounds.getWidth() - 1, (int) bounds.getHeight() - 1);
 
 	g.setColor(textColor);
 	Utils.drawCenteredString(g, getText(), new Rectangle(0, 0, getWidth(), getHeight()), getFont());

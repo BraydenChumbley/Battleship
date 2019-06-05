@@ -94,35 +94,6 @@ public class MainMenu extends JPanel {
 	    }
 	}
         );
-        
-        play.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                ((Button)play).setBackgroundColor(Color.blue); //When the mouse is clicked the background turns blue
-                ((Button)play).setBackgroundColor(Color.BLACK); //When the mouse is clicked the background turns black immediately after it turns blue to make it look like a clicked animation
-            }
-
-            @Override
-            public void mousePressed(MouseEvent me) {
-                ((Button)play).setBackgroundColor(Color.blue); //When the mouse is pressed the background turns blue
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent me) {
-                ((Button)play).setBackgroundColor(Color.BLACK); //When the mouse is released the background turns black
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent me) {
-                ((Button)play).setOutlineColor(Color.cyan); //When the mouse is hovering over the button, the outline color of the button changes to cyan
-            }
-
-            @Override
-            public void mouseExited(MouseEvent me) {
-                ((Button)play).setOutlineColor(Color.red); //When the mouse is no longer hovering over the button, the outline color changes back to normal
-            }
-        });
-	
 	
 	//Options Button
 	options = new Button("OPTIONS"); //Button displays OPTIONS
@@ -137,33 +108,6 @@ public class MainMenu extends JPanel {
 		System.out.println("Options" + options.getFont());
 	    }
 	});
-        options.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                ((Button)options).setBackgroundColor(Color.blue); //When the mouse is clicked the background turns blue
-                ((Button)options).setBackgroundColor(Color.BLACK); //When the mouse is clicked the background turns black immediately after it turns blue to make it look like a clicked animation
-            }
-
-            @Override
-            public void mousePressed(MouseEvent me) {
-                ((Button)options).setBackgroundColor(Color.blue); //When the mouse is pressed the background turns blue
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent me) {
-                ((Button)options).setBackgroundColor(Color.BLACK); //When the mouse is released the background turns black
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent me) {
-                ((Button)options).setOutlineColor(Color.cyan); //When the mouse is hovering over the button, the outline color of the button changes to cyan
-            }
-
-            @Override
-            public void mouseExited(MouseEvent me) {
-                ((Button)options).setOutlineColor(Color.red); //When the mouse is no longer hovering over the button, the outline color changes back to normal
-            }
-        });
         
 	//Credits Button
 	credits = new Button("CREDITS"); //Button displays CREDITS
@@ -180,33 +124,6 @@ public class MainMenu extends JPanel {
                 creditsTheme.play(); //The song for credits starts
 	    }
 	});
-	credits.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                ((Button)credits).setBackgroundColor(Color.blue); //When the mouse is clicked the background turns blue
-                ((Button)credits).setBackgroundColor(Color.BLACK); //When the mouse is clicked the background turns black immediately after it turns blue to make it look like a clicked animation
-            }
-
-            @Override
-            public void mousePressed(MouseEvent me) {
-                ((Button)credits).setBackgroundColor(Color.blue); //When the mouse is pressed the background turns blue
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent me) {
-                ((Button)credits).setBackgroundColor(Color.BLACK); //When the mouse is released the background turns black
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent me) {
-                ((Button)credits).setOutlineColor(Color.cyan); //When the mouse is hovering over the button, the outline color of the button changes to cyan
-            }
-
-            @Override
-            public void mouseExited(MouseEvent me) {
-                ((Button)credits).setOutlineColor(Color.red); //When the mouse is no longer hovering over the button, the outline color changes back to normal
-            }
-        });
         
 	//Quit Button
 	quit = new Button("QUIT"); //Button displays QUIT
@@ -221,33 +138,12 @@ public class MainMenu extends JPanel {
 		System.exit(0);
 	    }
 	});
-	quit.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                ((Button)quit).setBackgroundColor(Color.blue); //When the mouse is clicked the background turns blue
-                ((Button)quit).setBackgroundColor(Color.BLACK); //When the mouse is clicked the background turns black immediately after it turns blue to make it look like a clicked animation
-            }
-
-            @Override
-            public void mousePressed(MouseEvent me) {
-                ((Button)quit).setBackgroundColor(Color.blue); //When the mouse is pressed the background turns blue
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent me) {
-                ((Button)quit).setBackgroundColor(Color.BLACK); //When the mouse is released the background turns black
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent me) {
-                ((Button)quit).setOutlineColor(Color.cyan); //When the mouse is hovering over the button, the outline color of the button changes to cyan
-            }
-
-            @Override
-            public void mouseExited(MouseEvent me) {
-                ((Button)quit).setOutlineColor(Color.red); //When the mouse is no longer hovering over the button, the outline color changes back to normal
-            }
-        });
+	
+	play.addMouseListener((MouseListener) play);
+	options.addMouseListener((MouseListener) options);
+	credits.addMouseListener((MouseListener) credits);
+	quit.addMouseListener((MouseListener) quit);
+	
 	p.add(play);
 	p.add(options);
 	p.add(credits);
