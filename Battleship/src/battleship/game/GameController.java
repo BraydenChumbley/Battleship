@@ -41,18 +41,20 @@ public class GameController {
     public void update(Game game) {
 
 	if (placementPhase) {
-	    
+
 	    ships[placedShips].setPos(Coordinate.screenToCoordinate(game.getInput().getMouseX(), game.getInput().getMouseY(), ships[placedShips].isxAlignedEh() ? ships[placedShips].getSize() - 1 : 0,
 		    ships[placedShips].isxAlignedEh() ? 0 : ships[placedShips].getSize() - 1));
 
 	    if (game.getInput().isButtonDown(MouseEvent.BUTTON1)) {
-		if (Utils.placeShip(board, ships[placedShips])) {
-		    placedShips++;
-		    if (placedShips >= 5) {
-			placementPhase = false;
-		    }
-		    else{
-			game.getGOHandler().addObj(ships[placedShips]);
+		if (Utils.inRange(game.getInput().getMouseX(), board[0][0].getPos().getX(), board[9][9].getPos().getX() + Tile.TILE_SIZE) && 
+				  Utils.inRange(game.getInput().getMouseY(), board[0][0].getPos().getY(), board[9][9].getPos().getY() + Tile.TILE_SIZE)) {
+		    if (Utils.placeShip(board, ships[placedShips])) {
+			placedShips++;
+			if (placedShips >= 5) {
+			    placementPhase = false;
+			} else {
+			    game.getGOHandler().addObj(ships[placedShips]);
+			}
 		    }
 		}
 
@@ -64,8 +66,8 @@ public class GameController {
 	}
 	//ship1.setPos(new Coordinate(game.getInput().getMouseX()/Tile.TILE_SIZE, game.getInput().getMouseY()/Tile.TILE_SIZE));
     }
-    
-    public void startPlacementPhase(Game game){
+
+    public void startPlacementPhase(Game game) {
 	placementPhase = true;
 	game.getGOHandler().addObj(ships[placedShips]);
     }

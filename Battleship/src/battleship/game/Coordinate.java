@@ -11,7 +11,7 @@ package battleship.game;
  */
 public class Coordinate implements Comparable<Coordinate> {
     
-    private static final int X_SHIFT = 50, Y_SHIFT = 25;
+    private static final int X_SHIFT = (Game.WIDTH - (300 + Tile.TILE_SIZE*10))/2, Y_SHIFT = 25;
     
     private int absX, absY;
     private int x, y;

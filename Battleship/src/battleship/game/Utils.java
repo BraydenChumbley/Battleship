@@ -47,6 +47,10 @@ public class Utils {
 	    return value;
 	}
     }
+    
+    public static boolean inRange(int value, int min, int max){
+	return value >= min && value <= max;
+    }
 
     public static boolean placeShip(Tile[][] board, Ship s) {
 	
