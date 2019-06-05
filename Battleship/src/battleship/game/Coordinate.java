@@ -11,7 +11,7 @@ package battleship.game;
  */
 public class Coordinate implements Comparable<Coordinate> {
     
-    private static final int X_SHIFT = 200, Y_SHIFT = 100;
+    private static final int X_SHIFT = (Game.WIDTH - (300 + Tile.TILE_SIZE*10))/2, Y_SHIFT = 25;
     
     private int absX, absY;
     private int x, y;
@@ -42,6 +42,10 @@ public class Coordinate implements Comparable<Coordinate> {
     
     public static Coordinate screenToCoordinate(int x, int y){
 	return new Coordinate(Utils.clamp((x - X_SHIFT )/ Tile.TILE_SIZE, 0, 9), Utils.clamp((y - Y_SHIFT ) / Tile.TILE_SIZE, 0, 9));
+    }
+    
+    public static Coordinate screenToCoordinate(int x, int y, int restrictionX, int restrictionY){
+	return new Coordinate(Utils.clamp((x - X_SHIFT )/ Tile.TILE_SIZE, 0, 9 - restrictionX), Utils.clamp((y - Y_SHIFT ) / Tile.TILE_SIZE, 0, 9 - restrictionY));
     }
 
     public int getX() {

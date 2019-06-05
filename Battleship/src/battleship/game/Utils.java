@@ -28,9 +28,10 @@ public class Utils {
 	// Draw the String
 	g.drawString(text, x, y);
     }
-    
+
     /**
      * Clamp value in between a max and minimum value
+     *
      * @param value The value to clamp
      * @param min The minimum value of value
      * @param max The maximum value of value
@@ -44,6 +45,39 @@ public class Utils {
 	    return min;
 	} else {
 	    return value;
+	}
+    }
+    
+    public static boolean inRange(int value, int min, int max){
+	return value >= min && value <= max;
+    }
+
+    public static boolean placeShip(Tile[][] board, Ship s) {
+	
+	Tile[] checkedTiles = new Tile[s.getSize()];
+
+	try {
+	    
+	    for(int i = 0; i < s.getSize(); i++){
+		
+		Tile tempTile = board[s.getPos().getAbsX() + (s.isxAlignedEh() ? i : 0)][s.getPos().getAbsY() + (!s.isxAlignedEh() ? i : 0)];
+		
+		if(tempTile.isOccupiedEh()){
+		    
+		    for(int n = 0; n < i; n++){
+			checkedTiles[n].setOccupiedEh(false);
+		    }
+		    
+		    return false;
+		}
+		checkedTiles[i] = tempTile;
+		checkedTiles[i].setOccupiedEh(true);
+	    }
+	    
+	    return true;
+
+	} catch (ArrayIndexOutOfBoundsException e) {
+	    return false;
 	}
     }
 

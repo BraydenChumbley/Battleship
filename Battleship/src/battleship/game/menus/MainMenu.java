@@ -91,166 +91,61 @@ public class MainMenu extends JPanel {
 
         }
         );
-
-        play.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                ((Button) play).setBackgroundColor(Color.blue);
-                ((Button) play).setBackgroundColor(Color.BLACK);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent me) {
-                ((Button) play).setBackgroundColor(Color.blue);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent me) {
-                ((Button) play).setBackgroundColor(Color.BLACK);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent me) {
-                ((Button) play).setOutlineColor(Color.cyan);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent me) {
-                ((Button) play).setOutlineColor(Color.red);
-            }
-        });
-
-        //Options Button
-        options = new Button("OPTIONS");
-        options.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20));
-        ((Button) options).setTextColor(Color.ORANGE);
-        ((Button) options).setOutlineColor(Color.red);
-        ((Button) options).setBackgroundColor(Color.BLACK);
-        options.setBounds(padding, p.getHeight() / 4 + 125, p.getWidth() - padding * 2, 40);
-        options.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Options" + options.getFont());
-            }
-        });
-        options.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                ((Button) options).setBackgroundColor(Color.blue);
-                ((Button) options).setBackgroundColor(Color.BLACK);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent me) {
-                ((Button) options).setBackgroundColor(Color.blue);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent me) {
-                ((Button) options).setBackgroundColor(Color.BLACK);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent me) {
-                ((Button) options).setOutlineColor(Color.cyan);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent me) {
-                ((Button) options).setOutlineColor(Color.red);
-            }
-        });
-        //Credits Button
-
-        credits = new Button("CREDITS");
-        credits.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20));
-        ((Button) credits).setTextColor(Color.ORANGE);
-        ((Button) credits).setOutlineColor(Color.red);
-        ((Button) credits).setBackgroundColor(Color.BLACK);
-        credits.setBounds(padding, p.getHeight() / 4 + 225, p.getWidth() - padding * 2, 40);
-        credits.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Credits");
-                Game.menuTheme.stop();
-                Game.creditsTheme.play();
-                Game.setGameState(GAME_STATE.CREDITS_MENU);
-            }
-        });
-        credits.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                ((Button) credits).setBackgroundColor(Color.blue);
-                ((Button) credits).setBackgroundColor(Color.BLACK);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent me) {
-                ((Button) credits).setBackgroundColor(Color.blue);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent me) {
-                ((Button) credits).setBackgroundColor(Color.BLACK);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent me) {
-                ((Button) credits).setOutlineColor(Color.cyan);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent me) {
-                ((Button) credits).setOutlineColor(Color.red);
-            }
-        });
+	
+	//Options Button
+	options = new Button("OPTIONS"); //Button displays OPTIONS
+        options.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20)); //Set the font of the words
+        ((Button)options).setTextColor(Color.ORANGE); //Set the font color 
+        ((Button)options).setOutlineColor(Color.red); //Set the outline of the button
+        ((Button)options).setBackgroundColor(Color.BLACK); //Set the background of the button
+	options.setBounds(padding, p.getHeight()/4 + 125, p.getWidth()-padding*2, 40);
+	options.addActionListener(new ActionListener(){
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+		System.out.println("Options" + options.getFont());
+	    }
+	});
         
-        //Quit Button
-
-        quit = new Button("QUIT");
-        quit.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20));
-        ((Button) quit).setTextColor(Color.ORANGE);
-        ((Button) quit).setOutlineColor(Color.red);
-        ((Button) quit).setBackgroundColor(Color.BLACK);
-        quit.setBounds(padding, p.getHeight() / 4 + 325, p.getWidth() - padding * 2, 40);
-        quit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-        quit.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                ((Button) quit).setBackgroundColor(Color.blue);
-                ((Button) quit).setBackgroundColor(Color.BLACK);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent me) {
-                ((Button) quit).setBackgroundColor(Color.blue);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent me) {
-                ((Button) quit).setBackgroundColor(Color.BLACK);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent me) {
-                ((Button) quit).setOutlineColor(Color.cyan);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent me) {
-                ((Button) quit).setOutlineColor(Color.red);
-            }
-        });
-        p.add(play);
-        p.add(options);
-        p.add(credits);
-        p.add(quit);
-
+	//Credits Button
+	credits = new Button("CREDITS"); //Button displays CREDITS
+        credits.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20)); //Set the font of the words
+        ((Button)credits).setTextColor(Color.ORANGE); //Set the font color 
+        ((Button)credits).setOutlineColor(Color.red); //Set the outline of the button
+        ((Button)credits).setBackgroundColor(Color.BLACK); //Set the background of the button
+	credits.setBounds(padding, p.getHeight()/4 + 225, p.getWidth()-padding*2, 40);
+	credits.addActionListener(new ActionListener(){
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+		System.out.println("Credits");
+                menuTheme.stop(); //The song for menu stops 
+                creditsTheme.play(); //The song for credits starts
+	    }
+	});
+        
+	//Quit Button
+	quit = new Button("QUIT"); //Button displays QUIT
+        quit.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20)); //Set the font of the words
+        ((Button)quit).setTextColor(Color.ORANGE); //Set the font color 
+        ((Button)quit).setOutlineColor(Color.red); //Set the outline of the button
+        ((Button)quit).setBackgroundColor(Color.BLACK); //Set the background of the button
+	quit.setBounds(padding, p.getHeight()/4 + 325, p.getWidth()-padding*2, 40);
+	quit.addActionListener(new ActionListener(){
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+		System.exit(0);
+	    }
+	});
+	
+	play.addMouseListener((MouseListener) play);
+	options.addMouseListener((MouseListener) options);
+	credits.addMouseListener((MouseListener) credits);
+	quit.addMouseListener((MouseListener) quit);
+	
+	p.add(play);
+	p.add(options);
+	p.add(credits);
+	p.add(quit);
+	
     }
     
     /**

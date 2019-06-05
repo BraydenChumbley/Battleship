@@ -6,6 +6,8 @@
 package battleship.game;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 /**
  *
@@ -14,8 +16,9 @@ import java.awt.Graphics;
 public class GameController {
 
     private Tile[][] board;
-    private boolean isTurn;
-    private Ship ship1;
+    private boolean isTurn, placementPhase;
+    private Ship[] ships;
+    private int placedShips;
 
     public GameController(Game game) {
 	isTurn = false;
@@ -25,17 +28,52 @@ public class GameController {
 		board[x][y] = new Tile(x, y);
 	    }
 	}
-	ship1 = new Ship(new Coordinate(0, 0), 5, false);
-	game.getGOHandler().addObj(ship1);
+	placementPhase = false;
+	placedShips = 0;
+	ships = new Ship[5];
+	ships[0] = new Ship(new Coordinate(0, 0), 5, false);
+	ships[1] = new Ship(new Coordinate(0, 0), 4, false);
+	ships[2] = new Ship(new Coordinate(0, 0), 3, false);
+	ships[3] = new Ship(new Coordinate(0, 0), 3, false);
+	ships[4] = new Ship(new Coordinate(0, 0), 2, false);
     }
 
     public void update(Game game) {
-	ship1.setPos(Coordinate.screenToCoordinate(game.getInput().getMouseX(), game.getInput().getMouseY()));
+
+	if (placementPhase) {
+
+	    ships[placedShips].setPos(Coordinate.screenToCoordinate(game.getInput().getMouseX(), game.getInput().getMouseY(), ships[placedShips].isxAlignedEh() ? ships[placedShips].getSize() - 1 : 0,
+		    ships[placedShips].isxAlignedEh() ? 0 : ships[placedShips].getSize() - 1));
+
+	    if (game.getInput().isButtonDown(MouseEvent.BUTTON1)) {
+		if (Utils.inRange(game.getInput().getMouseX(), board[0][0].getPos().getX(), board[9][9].getPos().getX() + Tile.TILE_SIZE) && 
+				  Utils.inRange(game.getInput().getMouseY(), board[0][0].getPos().getY(), board[9][9].getPos().getY() + Tile.TILE_SIZE)) {
+		    if (Utils.placeShip(board, ships[placedShips])) {
+			placedShips++;
+			if (placedShips >= 5) {
+			    placementPhase = false;
+			} else {
+			    game.getGOHandler().addObj(ships[placedShips]);
+			}
+		    }
+		}
+
+	    }
+
+	    if (game.getInput().isButtonDown(MouseEvent.BUTTON2) || game.getInput().isKeyDown(KeyEvent.VK_R)) {
+		ships[placedShips].setxAlignedEh(!ships[placedShips].isxAlignedEh());
+	    }
+	}
 	//ship1.setPos(new Coordinate(game.getInput().getMouseX()/Tile.TILE_SIZE, game.getInput().getMouseY()/Tile.TILE_SIZE));
     }
-    
-    private void draw(Graphics g){
-	
+
+    public void startPlacementPhase(Game game) {
+	placementPhase = true;
+	game.getGOHandler().addObj(ships[placedShips]);
+    }
+
+    private void draw(Graphics g) {
+
     }
 
     public void displayHit() {
