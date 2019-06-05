@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
@@ -29,7 +30,7 @@ public class JoinGameMenu extends JPanel {
     private Image background;
     private JPanel inputPanel;
     private JTextField ipField, portField, unameField;
-    private JButton connectBtn;
+    private JButton connectBtn, backBtn;
 
     public JoinGameMenu() {
 	try {
@@ -60,19 +61,34 @@ public class JoinGameMenu extends JPanel {
 	connectBtn.addActionListener(new ActionListener(){
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
-		try {
+		/*try {
 		    Socket s = new Socket(ipField.getText(), Integer.parseInt(portField.getText()));
 		    Game.setGameState(GAME_STATE.GAME);
 		} catch (IOException ex) {
 		    Logger.getLogger(JoinGameMenu.class.getName()).log(Level.SEVERE, null, ex);
-		}
+		}*/
+		Game.menuTheme.stop();
+		Game.battleSetupTheme.loop();
+		Game.setGameState(GAME_STATE.GAME);
 	    }
 	});
+	
+	backBtn = new Button("Back", margin, (int) (b.getHeight() - height - 50), (int) (b.getWidth()-(2*margin)), height);
+	backBtn.addActionListener(new ActionListener(){
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+		Game.setGameState(GAME_STATE.MAIN_MENU);
+	    }
+	});
+	
+	connectBtn.addMouseListener((MouseListener) connectBtn);
+	backBtn.addMouseListener((MouseListener) backBtn);
 	
 	inputPanel.add(ipField);
 	inputPanel.add(portField);
 	inputPanel.add(unameField);
 	inputPanel.add(connectBtn);
+	inputPanel.add(backBtn);
 	
 	add(inputPanel);
 	

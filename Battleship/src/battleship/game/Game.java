@@ -158,7 +158,8 @@ public class Game extends JPanel implements Runnable {
 	    add(contentPanel);
 	    STATE_SWITCHED = false;
 	}
-	gc.update(this);
+	if(GAMESTATE == GAME_STATE.GAME)
+	    gc.update(this);
 	goHandler.update(this);
     }
 
