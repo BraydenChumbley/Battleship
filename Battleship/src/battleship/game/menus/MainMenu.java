@@ -35,8 +35,6 @@ import javax.swing.JPanel;
  */
 public class MainMenu extends JPanel {
 
-   
-
     private Image background;
 
     public MainMenu() {
@@ -70,65 +68,76 @@ public class MainMenu extends JPanel {
         add(btnPanel);
 
     }
-    
-    public void addButtons(JPanel p){
-	
-	JButton play, options, credits, quit; //Create JButtons for all the options in menu
-	int padding = 10;
-	
-	//Play Button
-        
-	play = new Button("START", padding, p.getHeight()/4 + 25, p.getWidth()-padding*2, 40); //Button displays START
+
+    public void addButtons(JPanel p) {
+
+        JButton play, options, credits, quit, score; //Create JButtons for all the options in menu
+        int padding = 10;
+
+        //Play Button
+        play = new Button("START", padding, p.getHeight() / 4 + 25, p.getWidth() - padding * 2, 40); //Button displays START
         play.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 25)); //Set the font of the words
-        
-	play.addActionListener(new ActionListener(){
-	    @Override
-	    public void actionPerformed(ActionEvent e) {
-		Game.setGameState(GAME_STATE.JOIN_MENU); //When the play button is clicked the Game State will change
-	    }
-	});
-	
-	//Options Button
-	options = new Button("OPTIONS", padding, p.getHeight()/4 + 125, p.getWidth()-padding*2, 40); //Button displays OPTIONS
-	options.addActionListener(new ActionListener(){
-	    @Override
-	    public void actionPerformed(ActionEvent e) {
-		System.out.println("Options" + options.getFont());
-	    }
-	});
-        
-	//Credits Button
-	credits = new Button("CREDITS", padding, p.getHeight()/4 + 225, p.getWidth()-padding*2, 40); //Button displays CREDITS
-	credits.addActionListener(new ActionListener(){
-	    @Override
-	    public void actionPerformed(ActionEvent e) {
-		Game.setGameState(GAME_STATE.CREDITS_MENU);
-	    }
-	});
-        
-	//Quit Button
-	quit = new Button("QUIT", padding, p.getHeight()/4 + 325, p.getWidth()-padding*2, 40); //Button displays QUIT
-	quit.addActionListener(new ActionListener(){
-	    @Override
-	    public void actionPerformed(ActionEvent e) {
-		System.exit(0);
-	    }
-	});
-	
-	play.addMouseListener((MouseListener) play);
-	options.addMouseListener((MouseListener) options);
-	credits.addMouseListener((MouseListener) credits);
-	quit.addMouseListener((MouseListener) quit);
-	
-	p.add(play);
-	p.add(options);
-	p.add(credits);
-	p.add(quit);
-	
+
+        play.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Game.setGameState(GAME_STATE.JOIN_MENU); //When the play button is clicked the Game State will change
+            }
+        });
+
+        //Options Button
+        options = new Button("OPTIONS", padding, p.getHeight() / 4 + 125, p.getWidth() - padding * 2, 40); //Button displays OPTIONS
+        options.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Options" + options.getFont());
+            }
+        });
+
+        //Credits Button
+        credits = new Button("CREDITS", padding, p.getHeight() / 4 + 225, p.getWidth() - padding * 2, 40); //Button displays CREDITS
+        credits.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Game.setGameState(GAME_STATE.CREDITS_MENU);
+            }
+        });
+
+        //Score Button
+        score = new Button("SCORE", padding, p.getHeight() / 4 + 325, p.getWidth() - padding * 2, 40); //Button displays SCORE
+        score.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Game.setGameState(GAME_STATE.SCORE);
+            }
+        });
+
+        //Quit Button
+        quit = new Button("QUIT", padding, p.getHeight() / 4 + 425, p.getWidth() - padding * 2, 40); //Button displays QUIT
+        quit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
+        play.addMouseListener((MouseListener) play);
+        options.addMouseListener((MouseListener) options);
+        credits.addMouseListener((MouseListener) credits);
+        score.addMouseListener((MouseListener) score);
+        quit.addMouseListener((MouseListener) quit);
+
+        p.add(play);
+        p.add(options);
+        p.add(credits);
+        p.add(score);
+        p.add(quit);
+
     }
-    
+
     /**
      * This method is for drawing images in the menu
+     *
      * @param g - Graphics object
      */
     @Override
