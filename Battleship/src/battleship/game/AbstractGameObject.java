@@ -26,10 +26,6 @@ public abstract class AbstractGameObject implements GameObject {
     public abstract void update(Game game);
     @Override
     public abstract void draw(Graphics g);
-    
-    public int getX(){
-	return pos.getX();
-    }
 
     @Override
     public Coordinate getPos() {

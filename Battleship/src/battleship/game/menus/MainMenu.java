@@ -4,6 +4,7 @@
  * This is the main menu 
  */
 package battleship.game.menus;
+
 import battleship.game.AudioClip;
 import battleship.game.uicomponents.Button;
 import battleship.game.GAME_STATE;
@@ -29,48 +30,45 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * 
+ *
  * @author toyu2550
  */
 public class MainMenu extends JPanel {
+
    
-    //Set a name to all the audo clips 
-    AudioClip menuTheme = new AudioClip("res\\audio\\song.wav");
-    AudioClip creditsTheme = new AudioClip("res\\audio\\credits.wav");
-    AudioClip battleTheme = new AudioClip("res\\audio\\battletheme.wav");
-    AudioClip battleSetupTheme = new AudioClip("res\\audio\\battlesetup.wav");
-    
+
     private Image background;
 
     public MainMenu() {
-        menuTheme.play(); //When the menu runs start playing menu song
+        //Game.menuTheme.play();
+
         //audio.stop();
         try {
-            init();    
+            init();
         } catch (IOException ex) {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    private void init() throws IOException{
-	setLayout(null);
-	background = ImageIO.read(new File("res\\gfx\\menubackground.png")).getScaledInstance(Game.WIDTH, Game.HEIGHT, Image.SCALE_FAST); //
-	setBounds(0, 0, Game.WIDTH, Game.HEIGHT); //Scale the background image to fit the whole screen
-	
-	JPanel btnPanel = new JPanel(); //JPanel is created for the buttons
-	btnPanel.setLayout(null);
-	btnPanel.setBounds(100, 0, 300, Game.HEIGHT); //Set the size of the JPanel
-	btnPanel.setBackground(new Color(50, 50, 50, 200)); //Set the color of the background
-	addButtons(btnPanel); //Add the buttons to JPanel
-        
-        ImageIcon titleImage = new ImageIcon(ImageIO.read(new File("res\\gfx\\title.png")).getScaledInstance(300, 90, Image.SCALE_FAST)); //Sets titleImage to the title of the image
-        JLabel titleLbl = new JLabel(); //New JLabel is created for label
-        titleLbl.setBounds(0,50,300,90); //Set the size of the label
-        titleLbl.setIcon(titleImage); //Put the image onto the label
-        btnPanel.add(titleLbl); //Add the label to the pannel
-	add(btnPanel); 
-        
-	
+
+    private void init() throws IOException {
+        setLayout(null);
+        background = ImageIO.read(new File("res\\gfx\\menubackground.png")).getScaledInstance(Game.WIDTH, Game.HEIGHT, Image.SCALE_FAST);
+        setBounds(0, 0, Game.WIDTH, Game.HEIGHT);
+
+        JPanel btnPanel = new JPanel();
+        btnPanel.setLayout(null);
+        btnPanel.setBounds(100, 0, 300, Game.HEIGHT);
+        btnPanel.setBackground(new Color(50, 50, 50, 200));
+        addButtons(btnPanel);
+
+        ImageIcon titleImage = new ImageIcon(ImageIO.read(new File("res\\gfx\\title.png")).getScaledInstance(300, 90, Image.SCALE_FAST));
+        JLabel titleLbl = new JLabel();
+        titleLbl.setBounds(0, 50, 300, 90);
+        titleLbl.setIcon(titleImage);
+        btnPanel.add(titleLbl);
+
+        add(btnPanel);
+
     }
     
     public void addButtons(JPanel p){
@@ -88,8 +86,7 @@ public class MainMenu extends JPanel {
 	    public void actionPerformed(ActionEvent e) {
 		Game.setGameState(GAME_STATE.JOIN_MENU); //When the play button is clicked the Game State will change
 	    }
-	}
-        );
+	});
 	
 	//Options Button
 	options = new Button("OPTIONS", padding, p.getHeight()/4 + 125, p.getWidth()-padding*2, 40); //Button displays OPTIONS
@@ -106,8 +103,6 @@ public class MainMenu extends JPanel {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
 		System.out.println("Credits");
-                menuTheme.stop(); //The song for menu stops 
-                creditsTheme.play(); //The song for credits starts
 	    }
 	});
         
@@ -137,7 +132,7 @@ public class MainMenu extends JPanel {
      * @param g - Graphics object
      */
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(background, 0, 0, null);  //Background is being drawn    
     }
