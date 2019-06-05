@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
 
 public class Tile extends AbstractGameObject {
 
-    public static final int TILE_SIZE = 50;
+    public static final int TILE_SIZE = 65;
     
     private int x, y;
     private boolean occupiedEh;

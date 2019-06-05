@@ -6,6 +6,7 @@
 package battleship.game;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 /**
@@ -32,7 +33,7 @@ public class GameController {
     
     public void update(Game game) {
 	ship1.setPos(Coordinate.screenToCoordinate(game.getInput().getMouseX(), game.getInput().getMouseY()));
-	if (game.getInput().isButtonDown(MouseEvent.BUTTON2)) {
+	if (game.getInput().isButtonDown(MouseEvent.BUTTON2) || game.getInput().isKeyDown(KeyEvent.VK_R)) {
 	    ship1.setxAlignedEh(!ship1.isxAlignedEh());
 	}
 	//ship1.setPos(new Coordinate(game.getInput().getMouseX()/Tile.TILE_SIZE, game.getInput().getMouseY()/Tile.TILE_SIZE));

@@ -11,7 +11,7 @@ package battleship.game;
  */
 public class Coordinate implements Comparable<Coordinate> {
     
-    private static final int X_SHIFT = 200, Y_SHIFT = 100;
+    private static final int X_SHIFT = 50, Y_SHIFT = 50;
     
     private int absX, absY;
     private int x, y;
