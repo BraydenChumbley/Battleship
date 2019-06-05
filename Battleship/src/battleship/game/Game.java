@@ -19,7 +19,10 @@ public class Game extends JPanel implements Runnable {
     
     public static GAME_STATE GAMESTATE = GAME_STATE.MAIN_MENU; //MAIN_MENU
     private static boolean STATE_SWITCHED = false;
-
+    public static AudioClip menuTheme = new AudioClip("res\\audio\\song.wav");
+    public static AudioClip creditsTheme = new AudioClip("res\\audio\\credits.wav");
+    public static AudioClip battleTheme = new AudioClip("res\\audio\\battletheme.wav");
+    public static AudioClip battleSetupTheme = new AudioClip("res\\audio\\battlesetup.wav");
     private Window window;
     private GameObjectHandler goHandler;
     private JPanel contentPanel;
@@ -40,6 +43,8 @@ public class Game extends JPanel implements Runnable {
             init();
             
             window = new Window(WIDTH, HEIGHT, "Battleship", this);
+            
+            Game.menuTheme.play();
         } catch (IOException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             System.exit(1);
@@ -125,8 +130,10 @@ public class Game extends JPanel implements Runnable {
     private void update(float dt) {
 	//Update game logic here
 	if(STATE_SWITCHED){
+            System.out.println("Removing: " + contentPanel.getClass());
 	    remove(contentPanel);
 	    contentPanel = GAMESTATE.getPanel();
+            System.out.println("Adding: " + contentPanel.getClass());
 	    add(contentPanel);
 	    STATE_SWITCHED = false;
 	}
