@@ -102,7 +102,7 @@ public class MainMenu extends JPanel {
 	credits.addActionListener(new ActionListener(){
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
-		System.out.println("Credits");
+		Game.setGameState(GAME_STATE.CREDITS_MENU);
 	    }
 	});
         
