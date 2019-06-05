@@ -7,6 +7,7 @@ package battleship.game.uicomponents;
 
 import battleship.game.Utils;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
@@ -35,6 +36,10 @@ public class Button extends JButton implements MouseListener {
 
     private void init(String text) {
 	setText(text);
+	setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20)); //Set the font of the words
+        setTextColor(Color.ORANGE); //Set the font color 
+        setOutlineColor(Color.red); //Set the outline of the button
+        setBackgroundColor(Color.BLACK); //Set the background of the button
 	setBounds(0, 0, 100, 30);
 	setBorderPainted(false);
     }

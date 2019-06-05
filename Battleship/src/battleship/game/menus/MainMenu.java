@@ -80,12 +80,8 @@ public class MainMenu extends JPanel {
 	
 	//Play Button
         
-	play = new Button("START"); //Button displays START
+	play = new Button("START", padding, p.getHeight()/4 + 25, p.getWidth()-padding*2, 40); //Button displays START
         play.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 25)); //Set the font of the words
-	play.setBounds(padding, p.getHeight()/4 + 25, p.getWidth()-padding*2, 40); //Set the size of the button
-        ((Button) play).setTextColor(Color.ORANGE); //Set the font color 
-        ((Button) play).setOutlineColor(Color.red); //Set the outline of the button
-        ((Button)play).setBackgroundColor(Color.black); //Set the background of the button
         
 	play.addActionListener(new ActionListener(){
 	    @Override
@@ -96,12 +92,7 @@ public class MainMenu extends JPanel {
         );
 	
 	//Options Button
-	options = new Button("OPTIONS"); //Button displays OPTIONS
-        options.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20)); //Set the font of the words
-        ((Button)options).setTextColor(Color.ORANGE); //Set the font color 
-        ((Button)options).setOutlineColor(Color.red); //Set the outline of the button
-        ((Button)options).setBackgroundColor(Color.BLACK); //Set the background of the button
-	options.setBounds(padding, p.getHeight()/4 + 125, p.getWidth()-padding*2, 40);
+	options = new Button("OPTIONS", padding, p.getHeight()/4 + 125, p.getWidth()-padding*2, 40); //Button displays OPTIONS
 	options.addActionListener(new ActionListener(){
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
@@ -110,12 +101,7 @@ public class MainMenu extends JPanel {
 	});
         
 	//Credits Button
-	credits = new Button("CREDITS"); //Button displays CREDITS
-        credits.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20)); //Set the font of the words
-        ((Button)credits).setTextColor(Color.ORANGE); //Set the font color 
-        ((Button)credits).setOutlineColor(Color.red); //Set the outline of the button
-        ((Button)credits).setBackgroundColor(Color.BLACK); //Set the background of the button
-	credits.setBounds(padding, p.getHeight()/4 + 225, p.getWidth()-padding*2, 40);
+	credits = new Button("CREDITS", padding, p.getHeight()/4 + 225, p.getWidth()-padding*2, 40); //Button displays CREDITS
 	credits.addActionListener(new ActionListener(){
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
@@ -126,12 +112,7 @@ public class MainMenu extends JPanel {
 	});
         
 	//Quit Button
-	quit = new Button("QUIT"); //Button displays QUIT
-        quit.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20)); //Set the font of the words
-        ((Button)quit).setTextColor(Color.ORANGE); //Set the font color 
-        ((Button)quit).setOutlineColor(Color.red); //Set the outline of the button
-        ((Button)quit).setBackgroundColor(Color.BLACK); //Set the background of the button
-	quit.setBounds(padding, p.getHeight()/4 + 325, p.getWidth()-padding*2, 40);
+	quit = new Button("QUIT", padding, p.getHeight()/4 + 325, p.getWidth()-padding*2, 40); //Button displays QUIT
 	quit.addActionListener(new ActionListener(){
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
