@@ -38,14 +38,6 @@ public class Game extends JPanel implements Runnable {
     private double runTime = 0;
 
     public Game() {
-        
-//            component.addMouseListener(new MouseListener() {
-//    @Override
-//    public void mouseClicked(MouseEvent e) {
-//    }
-//});
-
-        
         try {
             goHandler = new GameObjectHandler(this);
 	    
@@ -66,7 +58,7 @@ public class Game extends JPanel implements Runnable {
 	    
             window = new Window(WIDTH, HEIGHT, "Battleship", this);
             
-            Game.menuTheme.play();
+            Game.menuTheme.loop();
         } catch (IOException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             System.exit(1);
