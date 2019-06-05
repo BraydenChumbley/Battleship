@@ -117,8 +117,6 @@ public class MainMenu extends JPanel {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
 		System.out.println("Credits");
-                menuTheme.stop(); //The song for menu stops 
-                creditsTheme.play(); //The song for credits starts
 	    }
 	});
         
