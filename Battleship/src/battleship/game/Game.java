@@ -47,7 +47,9 @@ public class Game extends JPanel implements Runnable {
 		}
 	    }
 	    
-	    goHandler.addObj(new Ship(gc.getBoardLayout()[1][0], 1, false));
+	    gc.startPlacementPhase(this);
+	    
+	    //goHandler.addObj(new Ship(gc.getBoardLayout()[1][0], 1, false));
 	    
             window = new Window(WIDTH, HEIGHT, "Battleship", this);
         } catch (IOException ex) {
