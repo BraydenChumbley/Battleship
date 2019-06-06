@@ -57,7 +57,11 @@ public class MainMenu extends JPanel {
         btnPanel.setLayout(null);
         btnPanel.setBounds(100, 0, 300, Game.HEIGHT);
         btnPanel.setBackground(new Color(50, 50, 50, 200));
-        addButtons(btnPanel);
+	try {
+	    addButtons(btnPanel);
+	} catch (FontFormatException ex) {
+	    Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+	}
 
         ImageIcon titleImage = new ImageIcon(ImageIO.read(new File("res\\gfx\\title.png")).getScaledInstance(300, 90, Image.SCALE_FAST));
         JLabel titleLbl = new JLabel();
@@ -69,14 +73,14 @@ public class MainMenu extends JPanel {
 
     }
 
-    public void addButtons(JPanel p) {
+    public void addButtons(JPanel p) throws FontFormatException, IOException {
 
         JButton play, options, credits, quit, score; //Create JButtons for all the options in menu
         int padding = 10;
 
         //Play Button
         play = new Button("START", padding, p.getHeight() / 4 + 25, p.getWidth() - padding * 2, 40); //Button displays START
-        play.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 25)); //Set the font of the words
+        play.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("res\\fonts\\font.ttf")).deriveFont(25.0f)); //Set the font of the words
 
         play.addActionListener(new ActionListener() {
             @Override

@@ -1,14 +1,16 @@
 package battleship.game;
 
+import battleship.game.io.Input;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
@@ -25,6 +27,9 @@ public class Game extends JPanel implements Runnable {
     public static AudioClip creditsTheme = new AudioClip("res\\audio\\credits.wav");
     public static AudioClip battleTheme = new AudioClip("res\\audio\\battletheme.wav");
     public static AudioClip battleSetupTheme = new AudioClip("res\\audio\\battlesetup.wav");
+    
+    public static Font GAMEFONT = null;
+    
     private Window window;
     private Input input;
     private GameController gc;
@@ -38,14 +43,6 @@ public class Game extends JPanel implements Runnable {
     private double runTime = 0;
 
     public Game() {
-        
-//            component.addMouseListener(new MouseListener() {
-//    @Override
-//    public void mouseClicked(MouseEvent e) {
-//    }
-//});
-
-        
         try {
             goHandler = new GameObjectHandler(this);
 	    
@@ -66,7 +63,7 @@ public class Game extends JPanel implements Runnable {
 	    
             window = new Window(WIDTH, HEIGHT, "Battleship", this);
             
-            Game.menuTheme.play();
+            Game.menuTheme.loop();
         } catch (IOException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             System.exit(1);
@@ -166,7 +163,8 @@ public class Game extends JPanel implements Runnable {
 	    add(contentPanel);
 	    STATE_SWITCHED = false;
 	}
-	gc.update(this);
+	if(GAMESTATE == GAME_STATE.GAME)
+	    gc.update(this);
 	goHandler.update(this);
     }
 
@@ -201,7 +199,14 @@ public class Game extends JPanel implements Runnable {
     }
 
     public static void main(String[] args) {
-	new Game();
+	try {
+	    GAMEFONT = Font.createFont(Font.TRUETYPE_FONT, new File("res\\fonts\\font.ttf"));
+	    new Game();
+	} catch (FontFormatException ex) {
+	    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+	} catch (IOException ex) {
+	    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+	}
     }
 
 }

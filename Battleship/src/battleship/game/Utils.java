@@ -8,7 +8,13 @@ package battleship.game;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.text.BadLocationException;
 
 /**
  *
@@ -47,33 +53,33 @@ public class Utils {
 	    return value;
 	}
     }
-    
-    public static boolean inRange(int value, int min, int max){
+
+    public static boolean inRange(int value, int min, int max) {
 	return value >= min && value <= max;
     }
 
     public static boolean placeShip(Tile[][] board, Ship s) {
-	
+
 	Tile[] checkedTiles = new Tile[s.getSize()];
 
 	try {
-	    
-	    for(int i = 0; i < s.getSize(); i++){
-		
+
+	    for (int i = 0; i < s.getSize(); i++) {
+
 		Tile tempTile = board[s.getPos().getAbsX() + (s.isxAlignedEh() ? i : 0)][s.getPos().getAbsY() + (!s.isxAlignedEh() ? i : 0)];
-		
-		if(tempTile.isOccupiedEh()){
-		    
-		    for(int n = 0; n < i; n++){
+
+		if (tempTile.isOccupiedEh()) {
+
+		    for (int n = 0; n < i; n++) {
 			checkedTiles[n].setOccupiedEh(false);
 		    }
-		    
+
 		    return false;
 		}
 		checkedTiles[i] = tempTile;
 		checkedTiles[i].setOccupiedEh(true);
 	    }
-	    
+
 	    return true;
 
 	} catch (ArrayIndexOutOfBoundsException e) {
