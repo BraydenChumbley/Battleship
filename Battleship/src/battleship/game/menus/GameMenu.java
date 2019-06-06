@@ -53,6 +53,8 @@ public class GameMenu extends JPanel {
 	undoBtn.addActionListener(new ActionListener() {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
+		Game.battleSetupTheme.stop();
+		Game.menuTheme.loop();
 		game.getGC().undoPlacement();
 	    }
 	});
