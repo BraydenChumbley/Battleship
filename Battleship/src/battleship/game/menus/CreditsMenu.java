@@ -59,7 +59,7 @@ public class CreditsMenu extends JPanel {
 	
 	Rectangle b = getBounds();
 	int startY = 200, height = 50;
-	int margin = 10;
+	int padding = 10;
 	
 	/*credits = new battleship.game.Button("Credits");
 	credits.setBounds(padding, p.getHeight()/4 + 120, p.getWidth()-padding*2, 40);
@@ -70,13 +70,8 @@ public class CreditsMenu extends JPanel {
                 Game.setGameState(GAME_STATE.CREDITS_MENU);
 	    }
 	});*/
-	backBtn = new Button("Back", margin, startY + (margin + height)*(-3), (int) (b.getWidth()-(90*margin)), height);
-        ((Button)backBtn).setBackgroundColor(Color.yellow);
-        backBtn.setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20));
-        ((Button)backBtn).setTextColor(Color.ORANGE);
-        ((Button)backBtn).setOutlineColor(Color.red);
-        ((Button)backBtn).setBackgroundColor(Color.BLACK);
-	
+	backBtn = new Button("Back", padding, startY + (padding + height)*(-3), (int) (b.getWidth()-(90*padding)), height);
+
 	backBtn.addActionListener(new ActionListener(){
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
@@ -85,40 +80,7 @@ public class CreditsMenu extends JPanel {
                 Game.menuTheme.play();
 	    }
 	});
-	backBtn.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                ((Button)backBtn).setBackgroundColor(Color.blue);
-                ((Button)backBtn).setBackgroundColor(Color.BLACK);
-                
-            }
 
-            @Override
-            public void mousePressed(MouseEvent me) {
-                ((Button)backBtn).setBackgroundColor(Color.blue);
-                
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent me) {
-                ((Button)backBtn).setBackgroundColor(Color.BLACK);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent me) {
-                ((Button)backBtn).setOutlineColor(Color.cyan);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent me) {
-                ((Button)backBtn).setOutlineColor(Color.red);
-            }
-        });
-	
-	
-	
-	//inputPanel.add(backBtn);
-	
 	add(backBtn);
 	
     }

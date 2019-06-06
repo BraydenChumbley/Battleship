@@ -32,7 +32,6 @@ import javax.swing.JTextArea;
 public class Score extends JPanel {
 
     //private Image background;
-    private JPanel displayPanel;
     private JTextArea txtDisplay;
     private JButton backBtn;
     
@@ -51,12 +50,11 @@ public class Score extends JPanel {
         
 	setBounds(0, 0, Game.WIDTH, Game.HEIGHT);
 	
+        Rectangle b = getBounds();
 	int startY = 200, height = 50;
-	int margin = 10;
+	int padding = 10;
 	
-	
-	
-	backBtn = new Button("Back", 0, 0, 200, 50);
+        backBtn = new Button("Back", padding, startY + (padding + height)*(-3), (int) (b.getWidth()-(90*padding)), height);
         backBtn.setForeground(Color.red);
         
 	backBtn.addActionListener(new ActionListener(){
@@ -66,11 +64,15 @@ public class Score extends JPanel {
 	    }
 	});
 	
-	add(backBtn);
-	
-    }
-    
+        txtDisplay = new JTextArea();
+        txtDisplay.setBounds(300,400,200,200);
+        txtDisplay.setForeground(Color.white);
+        txtDisplay.setBackground(Color.red);
 
+      add(txtDisplay);
+    add(backBtn);	
+
+    }
     
     @Override
     public void paintComponent(Graphics g) {
