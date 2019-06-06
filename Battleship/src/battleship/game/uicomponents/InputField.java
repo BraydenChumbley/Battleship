@@ -1,6 +1,6 @@
 package battleship.game.uicomponents;
 
-import battleship.game.UnderscoreCaret;
+import battleship.game.io.UnderscoreCaret;
 import battleship.game.Utils;
 import java.awt.Color;
 import java.awt.Font;

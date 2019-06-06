@@ -1,5 +1,6 @@
 package battleship.game;
 
+import battleship.game.io.Input;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
