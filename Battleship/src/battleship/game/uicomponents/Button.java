@@ -82,6 +82,7 @@ public class Button extends JButton implements MouseListener {
     @Override
     public void mouseReleased(MouseEvent me) {
 	setBackgroundColor(Color.BLACK); //When the mouse is released the background turns black
+	setOutlineColor(Color.RED);
     }
 
     @Override
