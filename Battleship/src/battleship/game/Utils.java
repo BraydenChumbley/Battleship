@@ -87,4 +87,17 @@ public class Utils {
 	}
     }
 
+    public static void setTilesOccupied(int x, int y, int width, int height, Tile[][] board, boolean newState) {
+	for (int loopx = x; loopx < width + x; loopx++) {
+	    for (int loopy = y; y < height + y; loopy++) {
+		try {
+		    System.out.println("reseting");
+		    board[loopx][loopy].setOccupiedEh(newState);
+		} catch (ArrayIndexOutOfBoundsException e) {
+		    break;
+		}
+	    }
+	}
+    }
+
 }
