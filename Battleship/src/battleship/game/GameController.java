@@ -19,8 +19,10 @@ public class GameController {
     private boolean isTurn, placementPhase;
     private Ship[] ships;
     private int placedShips;
+    private Game game;
 
     public GameController(Game game) {
+	this.game = game;
 	isTurn = false;
 	board = new Tile[10][10];
 	for (int x = 0; x < 10; x++) {
@@ -46,8 +48,8 @@ public class GameController {
 		    ships[placedShips].isxAlignedEh() ? 0 : ships[placedShips].getSize() - 1));
 
 	    if (game.getInput().isButtonDown(MouseEvent.BUTTON1)) {
-		if (Utils.inRange(game.getInput().getMouseX(), board[0][0].getPos().getX(), board[9][9].getPos().getX() + Tile.TILE_SIZE) && 
-				  Utils.inRange(game.getInput().getMouseY(), board[0][0].getPos().getY(), board[9][9].getPos().getY() + Tile.TILE_SIZE)) {
+		if (Utils.inRange(game.getInput().getMouseX(), board[0][0].getPos().getX(), board[9][9].getPos().getX() + Tile.TILE_SIZE)
+			&& Utils.inRange(game.getInput().getMouseY(), board[0][0].getPos().getY(), board[9][9].getPos().getY() + Tile.TILE_SIZE)) {
 		    if (Utils.placeShip(board, ships[placedShips])) {
 			placedShips++;
 			if (placedShips >= 5) {
@@ -76,8 +78,17 @@ public class GameController {
 
     }
 
-    public void displayHit() {
+    public void undoPlacement() {
+	try {
+	    game.getGOHandler().removeObj(ships[placedShips]);
+	} catch (ArrayIndexOutOfBoundsException e) {
+	    placementPhase = true;
+	}
+	placedShips = Utils.clamp(placedShips - 1, 0, ships.length - 1);
 
+	Ship tempShip = ships[placedShips];
+
+	Utils.setTilesOccupied(tempShip.getPos().getAbsX(), tempShip.getPos().getAbsY(), tempShip.isxAlignedEh() ? tempShip.getSize() : 1, !tempShip.isxAlignedEh() ? tempShip.getSize() : 1, board, false);
     }
 
     public Tile[][] getBoardLayout() {

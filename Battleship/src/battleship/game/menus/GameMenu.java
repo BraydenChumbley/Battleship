@@ -20,8 +20,11 @@ import javax.swing.JPanel;
  * @author Brayden Chumbley
  */
 public class GameMenu extends JPanel {
+    
+    private Game game;
 
-    public GameMenu() {
+    public GameMenu(Game game) {
+	this.game = game;
 	init();
     }
 
@@ -38,16 +41,26 @@ public class GameMenu extends JPanel {
 
 	int xMargin = 25, yMargin = 50, btnHeight = 50;
 
-	leaveBtn = new Button("Leave", xMargin, p.getHeight() - (btnHeight + yMargin), p.getWidth() - (xMargin * 2), btnHeight);
+	leaveBtn = new Button("LEAVE", xMargin, p.getHeight() - (btnHeight + yMargin), p.getWidth() - (xMargin * 2), btnHeight);
 	leaveBtn.addActionListener(new ActionListener() {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
 		Game.setGameState(GAME_STATE.MAIN_MENU);
 	    }
 	});
+	
+	undoBtn = new Button("UNDO", xMargin, 400, p.getWidth() - (xMargin * 2), btnHeight);
+	undoBtn.addActionListener(new ActionListener() {
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+		game.getGC().undoPlacement();
+	    }
+	});
 
 	leaveBtn.addMouseListener((MouseListener) leaveBtn);
-
+	undoBtn.addMouseListener((MouseListener) undoBtn);
+	
+	p.add(undoBtn);
 	p.add(leaveBtn);
 
     }
