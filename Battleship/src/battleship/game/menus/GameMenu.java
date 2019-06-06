@@ -45,6 +45,8 @@ public class GameMenu extends JPanel {
 	leaveBtn.addActionListener(new ActionListener() {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
+		Game.battleSetupTheme.stop();
+		Game.menuTheme.loop();
 		Game.setGameState(GAME_STATE.MAIN_MENU);
 	    }
 	});
