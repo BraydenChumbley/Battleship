@@ -10,6 +10,8 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
@@ -56,6 +58,9 @@ public class JoinGameMenu extends JPanel {
 	ipField = new InputField("10.16.20.46", margin, startY + (margin + height)*0, (int) (b.getWidth()-(2*margin)), height);
 	portField = new InputField("6066", margin, startY + (margin + height)*1, (int) (b.getWidth()-(2*margin)), height);
 	unameField = new InputField("Username", margin, startY + (margin + height)*2, (int) (b.getWidth()-(2*margin)), height);
+	
+	ipField.addFocusListener((FocusListener) ipField);
+	ipField.addKeyListener((KeyListener) ipField);
 	
 	connectBtn = new Button("Connect", margin, startY + (margin + height)*3, (int) (b.getWidth()-(2*margin)), height);
 	connectBtn.addActionListener(new ActionListener(){

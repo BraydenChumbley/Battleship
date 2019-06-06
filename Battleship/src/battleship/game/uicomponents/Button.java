@@ -5,13 +5,19 @@
  */
 package battleship.game.uicomponents;
 
+import battleship.game.Game;
 import battleship.game.Utils;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 
 /**
@@ -25,7 +31,13 @@ public class Button extends JButton implements MouseListener {
     private Color backgroundColor;
 
     public Button(String text) {
-	init(text);
+	try {
+	    init(text);
+	} catch (FontFormatException ex) {
+	    Logger.getLogger(Button.class.getName()).log(Level.SEVERE, null, ex);
+	} catch (IOException ex) {
+	    Logger.getLogger(Button.class.getName()).log(Level.SEVERE, null, ex);
+	}
     }
 
     public Button(String text, int x, int y, int width, int height) {
@@ -34,9 +46,9 @@ public class Button extends JButton implements MouseListener {
 
     }
 
-    private void init(String text) {
+    private void init(String text) throws FontFormatException, IOException {
 	setText(text);
-	setFont(new Font("res\\fonts\\font.ttf", Font.BOLD, 20)); //Set the font of the words
+	setFont(Font.createFont(Font.TRUETYPE_FONT, new File("res\\fonts\\font.ttf")).deriveFont(20.0f)); //Set the font of the words
         setTextColor(Color.ORANGE); //Set the font color 
         setOutlineColor(Color.red); //Set the outline of the button
         setBackgroundColor(Color.BLACK); //Set the background of the button
