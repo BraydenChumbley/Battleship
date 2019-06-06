@@ -1,6 +1,11 @@
 package battleship.game;
 
 import battleship.game.io.Input;
+import battleship.game.menus.CreditsMenu;
+import battleship.game.menus.GameMenu;
+import battleship.game.menus.JoinGameMenu;
+import battleship.game.menus.MainMenu;
+import battleship.game.menus.Score;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -27,9 +32,9 @@ public class Game extends JPanel implements Runnable {
     public static AudioClip creditsTheme = new AudioClip("res\\audio\\credits.wav");
     public static AudioClip battleTheme = new AudioClip("res\\audio\\battletheme.wav");
     public static AudioClip battleSetupTheme = new AudioClip("res\\audio\\battlesetup.wav");
-    
+
     public static Font GAMEFONT = null;
-    
+
     private Window window;
     private Input input;
     private GameController gc;
@@ -43,31 +48,30 @@ public class Game extends JPanel implements Runnable {
     private double runTime = 0;
 
     public Game() {
-        try {
-            goHandler = new GameObjectHandler(this);
-	    
-            init();
-            
+	try {
+	    goHandler = new GameObjectHandler(this);
+
+	    init();
+
 	    input = new Input(this);
-	    
+
 	    gc = new GameController(this);
-	    for(int x = 0; x < 10; x++){
-		for(int y = 0; y < 10; y++){
+	    for (int x = 0; x < 10; x++) {
+		for (int y = 0; y < 10; y++) {
 		    goHandler.addObj(gc.getBoardLayout()[x][y]);
 		}
 	    }
-	    
+
 	    gc.startPlacementPhase(this);
-	    
+
 	    //goHandler.addObj(new Ship(gc.getBoardLayout()[1][0], 1, false));
-	    
-            window = new Window(WIDTH, HEIGHT, "Battleship", this);
-            
-            Game.menuTheme.loop();
-        } catch (IOException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-            System.exit(1);
-        }
+	    window = new Window(WIDTH, HEIGHT, "Battleship", this);
+
+	    Game.menuTheme.loop();
+	} catch (IOException ex) {
+	    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+	    System.exit(1);
+	}
     }
 
     private void init() {
@@ -75,7 +79,7 @@ public class Game extends JPanel implements Runnable {
 	setBounds(0, 0, Game.WIDTH, Game.HEIGHT);
 	setLayout(null);
 
-	contentPanel = GAMESTATE.getPanel();
+	contentPanel = new MainMenu();
 	add(contentPanel);
     }
 
@@ -94,7 +98,6 @@ public class Game extends JPanel implements Runnable {
 	}
     }
 
-    
     @Override
     public void run() {
 	requestFocus();
@@ -147,24 +150,40 @@ public class Game extends JPanel implements Runnable {
 	stop();
     }
 
-    public void mouseClicked(MouseEvent e){
-        int x = e.getX();
-        int y = e.getY();
-        System.out.println("X:" + x + " Y:" + y);
+    public void mouseClicked(MouseEvent e) {
+	int x = e.getX();
+	int y = e.getY();
+	System.out.println("X:" + x + " Y:" + y);
     }
-    
 
     private void update(float dt) {
 	//Update game logic here
 	if (STATE_SWITCHED) {
 	    remove(contentPanel);
-	    contentPanel = GAMESTATE.getPanel();
-            System.out.println("Adding: " + contentPanel.getClass());
+	    switch (GAMESTATE) {
+		case MAIN_MENU:
+		    contentPanel = new MainMenu();
+		    break;
+		case CREDITS_MENU:
+		    contentPanel = new CreditsMenu();
+		    break;
+		case JOIN_MENU:
+		    contentPanel = new JoinGameMenu();
+		    break;
+		case GAME:
+		    contentPanel = new GameMenu(this);
+		    break;
+		case SCORE:
+		    contentPanel = new Score();
+		    break;
+	    }
+	    System.out.println("Adding: " + contentPanel.getClass());
 	    add(contentPanel);
 	    STATE_SWITCHED = false;
 	}
-	if(GAMESTATE == GAME_STATE.GAME)
+	if (GAMESTATE == GAME_STATE.GAME) {
 	    gc.update(this);
+	}
 	goHandler.update(this);
     }
 
@@ -189,13 +208,17 @@ public class Game extends JPanel implements Runnable {
 	GAMESTATE = newState;
 	STATE_SWITCHED = true;
     }
-    
-    public Input getInput(){
+
+    public Input getInput() {
 	return input;
     }
-    
-    public GameObjectHandler getGOHandler(){
+
+    public GameObjectHandler getGOHandler() {
 	return goHandler;
+    }
+    
+    public GameController getGC(){
+	return gc;
     }
 
     public static void main(String[] args) {
