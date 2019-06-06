@@ -55,6 +55,7 @@ public class GameController {
 			if (placedShips >= 5) {
 			    placementPhase = false;
 			} else {
+			    ships[placedShips].setPos(Coordinate.screenToCoordinate(game.getInput().getMouseX(), game.getInput().getMouseY()));
 			    game.getGOHandler().addObj(ships[placedShips]);
 			}
 		    }
