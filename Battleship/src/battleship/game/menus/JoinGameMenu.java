@@ -55,12 +55,11 @@ public class JoinGameMenu extends JPanel {
 	int startY = 200, height = 50;
 	int margin = 10;
 	
-	ipField = new InputField("10.16.20.46", margin, startY + (margin + height)*0, (int) (b.getWidth()-(2*margin)), height);
-	portField = new InputField("6066", margin, startY + (margin + height)*1, (int) (b.getWidth()-(2*margin)), height);
+	ipField = new InputField("IP Address", margin, startY + (margin + height)*0, (int) (b.getWidth()-(2*margin)), height);
+	portField = new InputField("Port", margin, startY + (margin + height)*1, (int) (b.getWidth()-(2*margin)), height);
 	unameField = new InputField("Username", margin, startY + (margin + height)*2, (int) (b.getWidth()-(2*margin)), height);
 	
 	ipField.addFocusListener((FocusListener) ipField);
-	ipField.addKeyListener((KeyListener) ipField);
 	
 	connectBtn = new Button("Connect", margin, startY + (margin + height)*3, (int) (b.getWidth()-(2*margin)), height);
 	connectBtn.addActionListener(new ActionListener(){
