@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
@@ -37,6 +38,7 @@ public class InputField extends JTextField implements FocusListener, KeyListener
 	} catch (IOException ex) {
 	    Logger.getLogger(InputField.class.getName()).log(Level.SEVERE, null, ex);
 	}
+	
     }
 
     public InputField(String label, int x, int y, int width, int height) {

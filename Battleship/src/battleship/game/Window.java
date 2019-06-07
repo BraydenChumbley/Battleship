@@ -6,12 +6,11 @@
 
 package battleship.game;
 
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Image;
-import java.io.File;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -34,6 +33,31 @@ public final class Window extends JFrame{
 	setVisible(true);
 	//setIconImage(new ImageIcon(java.awt.Toolkit.getDefaultToolkit().getClass().getResource("res\\gfx\\icon.png"));
         //setIconImage(ImageIO.read (new File("res\\gfx\\icon.png")));
+	
+	//Component[] comps = this.getComponents();
+	
+	/*this.addComponentListener(new ComponentListener(){
+	    @Override
+	    public void componentResized(ComponentEvent e) {
+		game.revalidate();
+	    }
+
+	    @Override
+	    public void componentMoved(ComponentEvent e) {
+		//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	    }
+
+	    @Override
+	    public void componentShown(ComponentEvent e) {
+		//System.out.println("shown");
+	    }
+
+	    @Override
+	    public void componentHidden(ComponentEvent e) {
+		//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	    }
+	});*/
+	
 	game.start();
     }
     

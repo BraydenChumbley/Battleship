@@ -11,6 +11,8 @@ import battleship.game.uicomponents.Button;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -31,7 +33,7 @@ public class GameMenu extends JPanel {
     private void init() {
 	setBackground(Color.DARK_GRAY);
 	setBounds(Game.WIDTH - 300, 0, 300, Game.HEIGHT);
-
+	setLayout(null);
 	addButtons(this);
     }
 

@@ -30,7 +30,6 @@ import javax.swing.JTextField;
 public class JoinGameMenu extends JPanel {
     
     private Image background;
-    private JPanel inputPanel;
     private JTextField ipField, portField, unameField;
     private JButton connectBtn, backBtn;
 
@@ -47,7 +46,8 @@ public class JoinGameMenu extends JPanel {
 	background = ImageIO.read(new File("res\\gfx\\menubackground.png")).getScaledInstance(Game.WIDTH, Game.HEIGHT, Image.SCALE_FAST);
 	setBounds(0, 0, Game.WIDTH, Game.HEIGHT);
 	
-	inputPanel = new JPanel();
+	JPanel inputPanel = new JPanel();
+	inputPanel.setLayout(null);
 	inputPanel.setBounds(100, 0, 300, Game.HEIGHT);
 	inputPanel.setBackground(new Color(50, 50, 50, 200));
 	
@@ -59,7 +59,7 @@ public class JoinGameMenu extends JPanel {
 	portField = new InputField("Port", margin, startY + (margin + height)*1, (int) (b.getWidth()-(2*margin)), height);
 	unameField = new InputField("Username", margin, startY + (margin + height)*2, (int) (b.getWidth()-(2*margin)), height);
 	
-	ipField.addFocusListener((FocusListener) ipField);
+	//ipField.addFocusListener((FocusListener) ipField);
 	ipField.addKeyListener((KeyListener) ipField);
 	
 	connectBtn = new Button("Connect", margin, startY + (margin + height)*3, (int) (b.getWidth()-(2*margin)), height);
