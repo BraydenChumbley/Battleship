@@ -21,7 +21,7 @@ import javax.swing.JTextField;
  *
  * @author Brayden Chumbley
  */
-public class InputField extends JTextField implements FocusListener {
+public class InputField extends JTextField implements FocusListener, KeyListener {
 
     private String label;
     private Color outlineColor;
@@ -98,6 +98,25 @@ public class InputField extends JTextField implements FocusListener {
     @Override
     public void focusLost(FocusEvent e) {
 	setOutlineColor(Color.RED);
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+	char c = e.getKeyChar();
+	
+	if(c == '\\'){
+	    e.consume();
+	}
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+	//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+	//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

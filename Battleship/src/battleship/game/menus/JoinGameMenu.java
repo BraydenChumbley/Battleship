@@ -60,6 +60,7 @@ public class JoinGameMenu extends JPanel {
 	unameField = new InputField("Username", margin, startY + (margin + height)*2, (int) (b.getWidth()-(2*margin)), height);
 	
 	ipField.addFocusListener((FocusListener) ipField);
+	ipField.addKeyListener((KeyListener) ipField);
 	
 	connectBtn = new Button("Connect", margin, startY + (margin + height)*3, (int) (b.getWidth()-(2*margin)), height);
 	connectBtn.addActionListener(new ActionListener(){
