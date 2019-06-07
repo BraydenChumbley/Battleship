@@ -24,16 +24,18 @@ import javax.swing.JPanel;
  */
 public class Game extends JPanel implements Runnable {
 
-    public static final int WIDTH = 1280, HEIGHT = 720;
+    public static final int WIDTH = 1280, HEIGHT = 720; //The length and width of the window
 
-    public static GAME_STATE GAMESTATE = GAME_STATE.MAIN_MENU; //MAIN_MENU
-    private static boolean STATE_SWITCHED = false;
+    public static GAME_STATE GAMESTATE = GAME_STATE.MAIN_MENU; //GAME_STATE is used for the stages of the game
+    private static boolean STATE_SWITCHED = false; //This is a boolean used for seeing if the game state has changed
+    
+    //Sounds used in the game
     public static AudioClip menuTheme = new AudioClip("res\\audio\\song.wav");
     public static AudioClip creditsTheme = new AudioClip("res\\audio\\credits.wav");
     public static AudioClip battleTheme = new AudioClip("res\\audio\\battletheme.wav");
     public static AudioClip battleSetupTheme = new AudioClip("res\\audio\\battlesetup.wav");
 
-    public static Font GAMEFONT = null;
+    public static Font GAMEFONT = null; //The font used for this game
 
     private Window window;
     private Input input;

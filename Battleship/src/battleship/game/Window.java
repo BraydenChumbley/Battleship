@@ -20,9 +20,17 @@ import javax.swing.JFrame;
  */
 public final class Window extends JFrame{
     
+    /**
+     * This constructor is made to make it so it is easier to create windows
+     * @param width - The width of the window
+     * @param height - The height of the window
+     * @param title - The title of the window
+     * @param game - The game 
+     * @throws IOException 
+     */
     public Window(int width, int height, String title, Game game) throws IOException{
 	setTitle(title);
-	
+        
 	setPreferredSize(new Dimension(width, height));
 	setMinimumSize(new Dimension(width, height));
 	setMaximumSize(new Dimension(width, height));
@@ -30,11 +38,9 @@ public final class Window extends JFrame{
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setResizable(false);
 	setLocationRelativeTo(null);
-	add(game);
-	setVisible(true);
-	//setIconImage(new ImageIcon(java.awt.Toolkit.getDefaultToolkit().getClass().getResource("res\\gfx\\icon.png"));
-        //setIconImage(ImageIO.read (new File("res\\gfx\\icon.png")));
-	game.start();
+	add(game); //Add game to the window
+	setVisible(true); //Make the window visible
+	game.start(); //Start the game
     }
     
 }

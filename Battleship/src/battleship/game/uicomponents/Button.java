@@ -26,10 +26,14 @@ import javax.swing.JButton;
  */
 public class Button extends JButton implements MouseListener {
 
-    private Color outlineColor;
-    private Color textColor;
-    private Color backgroundColor;
+    private Color outlineColor; //Outline color of the button
+    private Color textColor; //Color of the font
+    private Color backgroundColor; //Background color of the button
 
+    /**
+     * This con
+     * @param text 
+     */
     public Button(String text) {
 	try {
 	    init(text);
