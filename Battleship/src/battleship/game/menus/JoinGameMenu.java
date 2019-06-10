@@ -71,8 +71,10 @@ public class JoinGameMenu extends JPanel {
 		} catch (IOException ex) {
 		    Logger.getLogger(JoinGameMenu.class.getName()).log(Level.SEVERE, null, ex);
 		}*/
+                if(Game.IS_AUDIO_ENABLED){
 		Game.menuTheme.stop();
 		Game.battleSetupTheme.loop();
+                }
 		Game.setGameState(GAME_STATE.GAME);
 	    }
 	});
@@ -81,6 +83,10 @@ public class JoinGameMenu extends JPanel {
 	backBtn.addActionListener(new ActionListener(){
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
+                if(Game.IS_AUDIO_ENABLED){
+                Game.menuTheme.play();
+                Game.battleSetupTheme.stop();
+                }
 		Game.setGameState(GAME_STATE.MAIN_MENU);
 	    }
 	});

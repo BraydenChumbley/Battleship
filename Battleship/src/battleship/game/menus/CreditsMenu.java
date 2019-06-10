@@ -74,8 +74,10 @@ public class CreditsMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Game.setGameState(GAME_STATE.MAIN_MENU);
+                if(Game.IS_AUDIO_ENABLED){
                 Game.creditsTheme.stop();
                 Game.menuTheme.play();
+                }
             }
         });
 

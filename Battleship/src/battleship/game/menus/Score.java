@@ -15,6 +15,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
@@ -61,6 +62,9 @@ public class Score extends JPanel {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
                 Game.setGameState(GAME_STATE.MAIN_MENU);
+                if(Game.IS_AUDIO_ENABLED){
+                    Game.menuTheme.play();
+                }
 	    }
 	});
 	
@@ -71,7 +75,7 @@ public class Score extends JPanel {
 
       add(txtDisplay);
     add(backBtn);	
-
+    backBtn.addMouseListener((MouseListener) backBtn);
     }
     
     @Override

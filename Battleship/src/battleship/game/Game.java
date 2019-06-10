@@ -47,7 +47,7 @@ public class Game extends JPanel implements Runnable {
     private boolean running = false;
     private final double UPDATE_CAP = 1.0 / 60.0;
     private double runTime = 0;
-
+    public static boolean IS_AUDIO_ENABLED = true;
     public Game() {
 	try {
 	    goHandler = new GameObjectHandler(this);
