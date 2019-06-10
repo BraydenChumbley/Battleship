@@ -1,3 +1,8 @@
+/*Tony 
+ * May 27 2019
+ * This class holds the different game states
+ */
+
 package battleship.game;
 
 public enum GAME_STATE {
