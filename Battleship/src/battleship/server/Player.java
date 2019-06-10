@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Tony Brayden Joh
+ * June 6 2019
+ * Class for player
  */
 
 package battleship.server;
@@ -18,10 +18,20 @@ public class Player {
     
     private String username;
     
+    /**
+     * Constructor for player
+     * @param soc - socket of the player
+     * @param username - Username of the player
+     * @param board - The tile board 
+     */
     public Player(Socket soc, String username, Tile[][] board){
 	
     }
     
+    /**
+     * Coordinate of ships 
+     * @return - return nothing
+     */
     public Coordinate getGuess(){
 	return null;
     }
