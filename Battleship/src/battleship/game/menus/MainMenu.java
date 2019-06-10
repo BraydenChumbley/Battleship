@@ -86,6 +86,8 @@ public class MainMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Game.setGameState(GAME_STATE.JOIN_MENU); //When the play button is clicked the Game State will change
+                Game.menuTheme.stop();
+                
             }
         });
 
@@ -95,6 +97,7 @@ public class MainMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Options" + options.getFont());
+                Game.setGameState(GAME_STATE.OPTIONS_MENU);
             }
         });
 
@@ -104,6 +107,8 @@ public class MainMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Game.setGameState(GAME_STATE.CREDITS_MENU);
+                Game.creditsTheme.play();
+                Game.menuTheme.stop();
             }
         });
 
@@ -130,13 +135,14 @@ public class MainMenu extends JPanel {
         credits.addMouseListener((MouseListener) credits);
         score.addMouseListener((MouseListener) score);
         quit.addMouseListener((MouseListener) quit);
-
+        
         p.add(play);
         p.add(options);
         p.add(credits);
         p.add(score);
         p.add(quit);
-
+        
+        
     }
 
     /**

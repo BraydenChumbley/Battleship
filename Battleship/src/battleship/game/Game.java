@@ -5,6 +5,7 @@ import battleship.game.menus.CreditsMenu;
 import battleship.game.menus.GameMenu;
 import battleship.game.menus.JoinGameMenu;
 import battleship.game.menus.MainMenu;
+import battleship.game.menus.OptionsMenu;
 import battleship.game.menus.Score;
 import java.awt.Color;
 import java.awt.Font;
@@ -176,6 +177,9 @@ public class Game extends JPanel implements Runnable {
 		case SCORE:
 		    contentPanel = new Score();
 		    break;
+                case OPTIONS_MENU:
+                    contentPanel = new OptionsMenu();
+                    break;
 	    }
 	    System.out.println("Adding: " + contentPanel.getClass());
 	    add(contentPanel);
