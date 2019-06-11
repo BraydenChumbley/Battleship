@@ -72,12 +72,12 @@ public class Game extends JPanel implements Runnable {
 	    Game.menuTheme.loop();
 	} catch (IOException ex) {
 	    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-	    System.exit(1);
+	    System.exit(1); 
 	}
     }
 
     private void init() {
-	setBackground(Color.BLACK);
+	setBackground(Color.BLACK); //The background of the game is set to black
 	setBounds(0, 0, Game.WIDTH, Game.HEIGHT);
 	setLayout(null);
 
@@ -152,12 +152,17 @@ public class Game extends JPanel implements Runnable {
 	stop();
     }
 
+    /**
+     * When the mouse is clicked get the x and y coordinates
+     * @param e - MouseEvent object
+     */
     public void mouseClicked(MouseEvent e) {
 	int x = e.getX();
 	int y = e.getY();
 	System.out.println("X:" + x + " Y:" + y);
     }
 
+    
     private void update(float dt) {
 	//Update game logic here
 	if (STATE_SWITCHED) {
@@ -200,6 +205,10 @@ public class Game extends JPanel implements Runnable {
 	contentPanel.repaint();
     }
 
+    /**
+     * Draws the game
+     * @param g - Graphics object
+     */
     @Override
     public void paintComponent(Graphics g) {
 	super.paintComponent(g);

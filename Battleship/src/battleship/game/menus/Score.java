@@ -16,7 +16,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.io.*;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -75,6 +75,9 @@ public class Score extends JPanel {
         lblScore = new JLabel();
         txtDisplay = new JTextArea();
 
+        FileReader fr = new FileReader("src\\battleship\\scoreFile.txt");
+        BufferedReader br = new BufferedReader(fr);
+       
         ArrayList<Integer> data = new ArrayList<>();
         data.add(1);
         data.add(4);
@@ -94,7 +97,6 @@ public class Score extends JPanel {
         add(lblScore);
         add(txtDisplay);
         add(backBtn);
-
     }
 
     @Override
