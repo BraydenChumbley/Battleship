@@ -11,11 +11,15 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -34,6 +38,7 @@ public class Game extends JPanel implements Runnable {
     public static AudioClip battleSetupTheme = new AudioClip("res\\audio\\battlesetup.wav");
 
     public static Font GAMEFONT = null;
+    public static JPanel messagePanel = new JPanel();
 
     private Window window;
     private Input input;
@@ -48,21 +53,16 @@ public class Game extends JPanel implements Runnable {
     private double runTime = 0;
 
     public Game() {
+	
+	messagePanel.setLayout(null);
+	messagePanel.setBounds(100, Game.HEIGHT / 2 - 200 / 2, 800, 200);
+	
 	try {
 	    goHandler = new GameObjectHandler(this);
 
 	    init();
 
 	    input = new Input(this);
-
-	    gc = new GameController(this);
-	    for (int x = 0; x < 10; x++) {
-		for (int y = 0; y < 10; y++) {
-		    goHandler.addObj(gc.getBoardLayout()[x][y]);
-		}
-	    }
-
-	    gc.startPlacementPhase(this);
 
 	    //goHandler.addObj(new Ship(gc.getBoardLayout()[1][0], 1, false));
 	    window = new Window(WIDTH, HEIGHT, "Battleship", this);
@@ -168,7 +168,7 @@ public class Game extends JPanel implements Runnable {
 		    contentPanel = new CreditsMenu();
 		    break;
 		case JOIN_MENU:
-		    contentPanel = new JoinGameMenu();
+		    contentPanel = new JoinGameMenu(this);
 		    break;
 		case GAME:
 		    contentPanel = new GameMenu(this);
@@ -217,8 +217,53 @@ public class Game extends JPanel implements Runnable {
 	return goHandler;
     }
     
+    public void setGameController(GameController gc){
+	this.gc = gc;
+    }
+    
     public GameController getGC(){
 	return gc;
+    }
+    
+    public void displayMessage(String m) {
+	int xOff = 100, width = 800, height = 200;
+
+	JLabel message = new JLabel(m);
+	Rectangle b = messagePanel.getBounds();
+	
+	message.setFont(Game.GAMEFONT.deriveFont(42.0f));
+	message.setBounds(Utils.getCenteredStringBounds(message, m, b, message.getFont()));
+	messagePanel.add(message);
+	this.add(messagePanel);
+
+    }
+    
+    public void undisplayMessage(){
+	messagePanel.removeAll();
+	this.remove(messagePanel);
+    }
+    
+    public void displayMessage(Game game, String m, int length) {
+	int xOff = 100, width = 800, height = 200;
+
+	JLabel message = new JLabel(m);
+	Rectangle b = messagePanel.getBounds();
+	
+	message.setFont(Game.GAMEFONT.deriveFont(42.0f));
+	message.setBounds(Utils.getCenteredStringBounds(message, m, b, message.getFont()));
+	messagePanel.add(message);
+	this.add(messagePanel);
+	
+	Timer time = new Timer();
+	time.schedule(new TimerTask(){
+	    @Override
+	    public void run() {
+		messagePanel.remove(message);
+		game.remove(messagePanel);
+		time.cancel();
+	    }
+	}, length*1000);
+
     }
 
     public static void main(String[] args) {

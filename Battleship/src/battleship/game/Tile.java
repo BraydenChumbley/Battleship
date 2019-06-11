@@ -33,11 +33,15 @@ public class Tile extends AbstractGameObject {
 
     @Override
     public void update(Game game) {
-	if (game.getInput().isButtonDown(MouseEvent.BUTTON1)) {
+	if (game.getInput().isButtonDown(MouseEvent.BUTTON1) && game.getGC().isTurn()) {
 	    if (game.getInput().getMouseX() > pos.getX() && game.getInput().getMouseX() < pos.getX() + TILE_SIZE) {
 		if (game.getInput().getMouseY() > pos.getY() && game.getInput().getMouseY() < pos.getY() + TILE_SIZE) {
 		    System.out.println("Clicked " + pos.getAbsX() + ":" + pos.getAbsY());
 		    System.out.println(occupiedEh? "Hit" : "Miss");
+		    if(!guessedEh){
+			game.getGC().setIsTurn(false);
+			game.getGC().swapBoard(game.getGC().getBoardLayout(), true);
+		    }
 		}
 	    }
 	}
@@ -60,7 +64,7 @@ public class Tile extends AbstractGameObject {
 
     @Override
     public String toString() {
-	return "Tile{" + "x=" + pos.getX() + ",y=" + pos.getY() + "}";
+	return pos.getX()+ " " + pos.getY();
     }
 
     public int getX() {
