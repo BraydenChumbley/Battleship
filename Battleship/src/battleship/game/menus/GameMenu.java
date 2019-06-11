@@ -54,14 +54,12 @@ public class GameMenu extends JPanel {
 	leaveBtn.addActionListener(new ActionListener() {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
-		try {
-		    Game.battleSetupTheme.stop();
-		    Game.menuTheme.loop();
-		    Game.setGameState(GAME_STATE.MAIN_MENU);
-		    game.getGC().getOutputStream().writeUTF("quit");
-		} catch (IOException ex) {
-		    Logger.getLogger(GameMenu.class.getName()).log(Level.SEVERE, null, ex);
-		}
+
+                if(Game.IS_AUDIO_ENABLED){
+		Game.battleSetupTheme.stop();
+		Game.menuTheme.loop();
+                }
+		Game.setGameState(GAME_STATE.MAIN_MENU);
 	    }
 	});
 

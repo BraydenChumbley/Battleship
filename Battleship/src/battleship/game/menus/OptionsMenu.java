@@ -28,17 +28,16 @@ import javax.swing.JPanel;
  *
  * @author johic8379
  */
-public class CreditsMenu extends JPanel {
+public class OptionsMenu extends JPanel {
 
     private Image background;
     //private JPanel inputPanel;
-    private JLabel braydenLbl;
-    private JLabel joshLbl;
-    private JLabel tonyLbl;
-    private JButton backBtn;
 
-    public CreditsMenu() {
-        System.out.println("hdf");
+    private JButton backBtn;
+    private JButton musicToggleBtn;
+
+    public OptionsMenu() {
+        System.out.println("optionstest");
         try {
             init();
         } catch (IOException ex) {
@@ -48,7 +47,7 @@ public class CreditsMenu extends JPanel {
 
     private void init() throws IOException {
         setLayout(null);
-        background = Toolkit.getDefaultToolkit().createImage("res\\gfx\\BrownTatteredAmericanredsquirrel-small.gif");
+        //  background = Toolkit.getDefaultToolkit().createImage("res\\gfx\\BrownTatteredAmericanredsquirrel-small.gif");
         setBounds(0, 0, Game.WIDTH, Game.HEIGHT);
         this.setBackground(new Color(86, 172, 255, 0));
 
@@ -58,6 +57,7 @@ public class CreditsMenu extends JPanel {
         Rectangle b = getBounds();
         int startY = 200, height = 50;
         int padding = 10;
+        String torfMsg = "on";
 
         /*credits = new battleship.game.Button("Credits");
 	credits.setBounds(padding, p.getHeight()/4 + 120, p.getWidth()-padding*2, 40);
@@ -74,22 +74,27 @@ public class CreditsMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Game.setGameState(GAME_STATE.MAIN_MENU);
-                if(Game.IS_AUDIO_ENABLED){
-                Game.creditsTheme.stop();
-                Game.menuTheme.play();
-                }
+
             }
         });
+        musicToggleBtn = new Button("Toggle Music", padding, startY + (padding + height) * (-1), (int) (b.getWidth() - (90 * padding)), height);
 
+        musicToggleBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Game.IS_AUDIO_ENABLED = !(Game.IS_AUDIO_ENABLED);
+                if (Game.IS_AUDIO_ENABLED) {
+                    Game.menuTheme.loop();
+                } else {
+                    Game.menuTheme.stop();
+                }
+                
+            }
+        });
         add(backBtn);
+        add(musicToggleBtn);
         backBtn.addMouseListener((MouseListener) backBtn);
-
-        braydenLbl = new Label("Brayden C.", (Game.WIDTH) / 2, startY + (padding + height) * (-1), (int) (b.getWidth() - (90 * padding)), height);
-        joshLbl = new Label("Tony Y.", (Game.WIDTH) / 2, startY + (padding + height) * (-2), (int) (b.getWidth() - (90 * padding)), height);
-        tonyLbl = new Label("Joshua H.", (Game.WIDTH) / 2, startY + (padding + height) * (-3), (int) (b.getWidth() - (90 * padding)), height);
-        add(braydenLbl);
-        add(joshLbl);
-        add(tonyLbl);
+        musicToggleBtn.addMouseListener((MouseListener) musicToggleBtn);
     }
 
     @Override

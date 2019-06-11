@@ -5,6 +5,7 @@ import battleship.game.menus.CreditsMenu;
 import battleship.game.menus.GameMenu;
 import battleship.game.menus.JoinGameMenu;
 import battleship.game.menus.MainMenu;
+import battleship.game.menus.OptionsMenu;
 import battleship.game.menus.Score;
 import java.awt.Color;
 import java.awt.Font;
@@ -54,7 +55,7 @@ public class Game extends JPanel implements Runnable {
     private boolean running = false;
     private final double UPDATE_CAP = 1.0 / 60.0;
     private double runTime = 0;
-
+    public static boolean IS_AUDIO_ENABLED = true;
     public Game() {
 	
 	messagePanel.setLayout(null);
@@ -184,6 +185,9 @@ public class Game extends JPanel implements Runnable {
 		case SCORE:
 		    contentPanel = new Score();
 		    break;
+                case OPTIONS_MENU:
+                    contentPanel = new OptionsMenu();
+                    break;
 	    }
 	    System.out.println("Adding: " + contentPanel.getClass());
 	    add(contentPanel);
