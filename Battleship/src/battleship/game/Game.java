@@ -39,12 +39,9 @@ public class Game extends JPanel implements Runnable {
     public static AudioClip battleTheme = new AudioClip("res\\audio\\battletheme.wav");
     public static AudioClip battleSetupTheme = new AudioClip("res\\audio\\battlesetup.wav");
 
-<<<<<<< HEAD
     public static Font GAMEFONT = null;
     public static JPanel messagePanel = new JPanel();
-=======
-    public static Font GAMEFONT = null; //The font used for this game
->>>>>>> dev
+
 
     private Window window;
     private Input input;
