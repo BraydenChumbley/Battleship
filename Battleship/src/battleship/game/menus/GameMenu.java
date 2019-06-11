@@ -37,7 +37,7 @@ public class GameMenu extends JPanel {
 
     private void addButtons(JPanel p) {
 
-	JButton leaveBtn, undoBtn, readyBtn;
+	JButton leaveBtn, undoBtn, readyBtn; //The different buttons
 
 	int xMargin = 25, yMargin = 50, btnHeight = 50;
 
