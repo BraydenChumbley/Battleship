@@ -28,17 +28,23 @@ import javax.swing.JPanel;
  */
 public class Game extends JPanel implements Runnable {
 
-    public static final int WIDTH = 1280, HEIGHT = 720;
+    public static final int WIDTH = 1280, HEIGHT = 720; //The length and width of the window
 
-    public static GAME_STATE GAMESTATE = GAME_STATE.MAIN_MENU; //MAIN_MENU
-    private static boolean STATE_SWITCHED = false;
+    public static GAME_STATE GAMESTATE = GAME_STATE.MAIN_MENU; //GAME_STATE is used for the stages of the game
+    private static boolean STATE_SWITCHED = false; //This is a boolean used for seeing if the game state has changed
+    
+    //Sounds used in the game
     public static AudioClip menuTheme = new AudioClip("res\\audio\\song.wav");
     public static AudioClip creditsTheme = new AudioClip("res\\audio\\credits.wav");
     public static AudioClip battleTheme = new AudioClip("res\\audio\\battletheme.wav");
     public static AudioClip battleSetupTheme = new AudioClip("res\\audio\\battlesetup.wav");
 
+<<<<<<< HEAD
     public static Font GAMEFONT = null;
     public static JPanel messagePanel = new JPanel();
+=======
+    public static Font GAMEFONT = null; //The font used for this game
+>>>>>>> dev
 
     private Window window;
     private Input input;
@@ -70,12 +76,12 @@ public class Game extends JPanel implements Runnable {
 	    Game.menuTheme.loop();
 	} catch (IOException ex) {
 	    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-	    System.exit(1);
+	    System.exit(1); 
 	}
     }
 
     private void init() {
-	setBackground(Color.BLACK);
+	setBackground(Color.BLACK); //The background of the game is set to black
 	setBounds(0, 0, Game.WIDTH, Game.HEIGHT);
 	setLayout(null);
 
@@ -150,12 +156,17 @@ public class Game extends JPanel implements Runnable {
 	stop();
     }
 
+    /**
+     * When the mouse is clicked get the x and y coordinates
+     * @param e - MouseEvent object
+     */
     public void mouseClicked(MouseEvent e) {
 	int x = e.getX();
 	int y = e.getY();
 	System.out.println("X:" + x + " Y:" + y);
     }
 
+    
     private void update(float dt) {
 	//Update game logic here
 	if (STATE_SWITCHED) {
@@ -198,6 +209,10 @@ public class Game extends JPanel implements Runnable {
 	contentPanel.repaint();
     }
 
+    /**
+     * Draws the game
+     * @param g - Graphics object
+     */
     @Override
     public void paintComponent(Graphics g) {
 	super.paintComponent(g);

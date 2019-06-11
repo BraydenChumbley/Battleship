@@ -137,6 +137,9 @@ public class GameController {
 
     }
 
+    /**
+     * Method is used to undo where the user placed the boat
+     */
     public void undoPlacement() {
 	if (isReady) {
 	    return;

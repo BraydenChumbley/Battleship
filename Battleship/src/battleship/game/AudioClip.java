@@ -18,6 +18,10 @@ public class AudioClip {
 
     private Clip clip;
 
+    /**
+     * This constructor is used for the file path
+     * @param sound - the file path of the audio clip
+     */
     public AudioClip(String sound) {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(sound).getAbsoluteFile());
@@ -29,13 +33,18 @@ public class AudioClip {
         }
 
     }
+    
+    //This method plays the audio clip
     public void play(){
         clip.start();
     }
     
+    //This method stops the audio clip
     public void stop(){
         clip.stop();
     }
+    
+    //This method repeats the audio clip
     public void loop(){
         clip.loop(1010);
     }
