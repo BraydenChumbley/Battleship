@@ -68,6 +68,12 @@ public class GameObjectHandler {
     public void removeObj(AbstractGameObject obj) {
         objects.remove(obj);
     }
+    
+    public void removeAllObj(){
+	for(int i = 0; i < objects.size(); i++){
+	    objects.remove(i);
+	}
+    }
 
     /**
      *

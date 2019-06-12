@@ -5,9 +5,20 @@
  */
 package battleship.game;
 
+import static battleship.game.Tile.TILE_SIZE;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.SocketTimeoutException;
+import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,21 +26,28 @@ import java.awt.event.MouseEvent;
  */
 public class GameController {
 
-    private Tile[][] board;
-    private boolean isTurn, placementPhase;
+    private Tile[][] board, enemyBoard;
+    private boolean isTurn, placementPhase, isReady;
     private Ship[] ships;
     private int placedShips;
     private Game game;
+    private Socket s;
+    final private DataOutputStream dOut;
+    final private DataInputStream dIn;
+    private Timer socketListener;
 
-    public GameController(Game game) {
+    public GameController(Game game, Socket s) throws IOException {
+	this.s = s;
+	
+	//s.setSoTimeout();
+	this.isReady = false;
+	dOut = new DataOutputStream(s.getOutputStream());
+	dIn = new DataInputStream(s.getInputStream());
+
 	this.game = game;
 	isTurn = false;
 	board = new Tile[10][10];
-	for (int x = 0; x < 10; x++) {
-	    for (int y = 0; y < 10; y++) {
-		board[x][y] = new Tile(x, y);
-	    }
-	}
+
 	placementPhase = false;
 	placedShips = 0;
 	ships = new Ship[5];
@@ -38,9 +56,50 @@ public class GameController {
 	ships[2] = new Ship(new Coordinate(0, 0), 3, false);
 	ships[3] = new Ship(new Coordinate(0, 0), 3, false);
 	ships[4] = new Ship(new Coordinate(0, 0), 2, false);
+
+	socketListener = new Timer();
+
     }
 
     public void update(Game game) {
+
+	if (board[0][0] == null) {
+	    
+	    board = Utils.receiveBoard(dIn);
+	    
+	    for(int x = 0; x < 10; x++){
+		for(int y = 0; y < 10; y++){
+		    game.getGOHandler().addObj(board[x][y]);
+		}
+	    }
+	    
+	    TimerTask socketTask = new TimerTask() {
+		@Override
+		public void run() {
+		    try {
+			String data = dIn.readUTF();
+			System.out.println(data);
+			if (data.equalsIgnoreCase("placementphase")) {
+			    if (dIn.readBoolean()) {
+				startPlacementPhase(game);
+			    }
+			}
+			else if(data.equalsIgnoreCase("enemyboard")) {
+			    enemyBoard = Utils.receiveBoard(dIn);
+			}
+			else if(data.equalsIgnoreCase("isturn")){
+			    swapBoard(enemyBoard, false);
+			    isTurn = true;
+			}
+		    } catch (SocketTimeoutException e) {
+			//System.out.println("timedout");
+		    } catch (IOException e) {
+		    }
+		}
+	    };
+
+	    socketListener.scheduleAtFixedRate(socketTask, 0, 1000);
+	}
 
 	if (placementPhase) {
 
@@ -67,7 +126,6 @@ public class GameController {
 		ships[placedShips].setxAlignedEh(!ships[placedShips].isxAlignedEh());
 	    }
 	}
-	//ship1.setPos(new Coordinate(game.getInput().getMouseX()/Tile.TILE_SIZE, game.getInput().getMouseY()/Tile.TILE_SIZE));
     }
 
     public void startPlacementPhase(Game game) {
@@ -83,22 +141,96 @@ public class GameController {
      * Method is used to undo where the user placed the boat
      */
     public void undoPlacement() {
+	if (isReady) {
+	    return;
+	}
 	try {
 	    game.getGOHandler().removeObj(ships[placedShips]);
 	} catch (ArrayIndexOutOfBoundsException e) {
 	    placementPhase = true;
 	}
 	placedShips = Utils.clamp(placedShips - 1, 0, ships.length - 1);
-	
-	if(placedShips == 0) game.getGOHandler().addObj(ships[placedShips]);
+
+	if (placedShips == 0) {
+	    game.getGOHandler().addObj(ships[placedShips]);
+	}
 
 	Ship tempShip = ships[placedShips];
 
 	Utils.setTilesOccupied(tempShip.getPos().getAbsX(), tempShip.getPos().getAbsY(), tempShip.isxAlignedEh() ? tempShip.getSize() : 1, !tempShip.isxAlignedEh() ? tempShip.getSize() : 1, board, false);
     }
 
+    public boolean ready() throws IOException {
+	if (!placementPhase) {
+	    dOut.writeUTF("ready");
+	    isReady = true;
+	    return true;
+	} else {
+	    game.displayMessage(game, "Not All Ships Placed", 2);
+	    return false;
+	}
+    }
+
+    public void swapBoard(Tile[][] newBoard, boolean drawShips) {
+	for (int x = 0; x < 10; x++) {
+	    for (int y = 0; y < 10; y++) {
+		game.getGOHandler().removeObj(board[x][y]);
+		game.getGOHandler().addObj(newBoard[x][y]);
+	    }
+	}
+
+	for (int i = 0; i < ships.length; i++) {
+	    ships[i].setIsDrawn(drawShips);
+	}
+    }
+
+    public void dispose() {
+	try {
+	    game.undisplayMessage();
+	    game.getGOHandler().removeAllObj();
+	    sendData("quit");
+	    s.close();
+	    dOut.close();
+	    dIn.close();
+	} catch (IOException ex) {
+	    Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+	}
+    }
+
+    public void sendData(String data) {
+	try {
+	    dOut.writeUTF(data);
+	} catch (IOException ex) {
+	    Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+	}
+    }
+
+    public void sendBoolean(boolean bool) {
+	try {
+	    dOut.writeBoolean(bool);
+	} catch (IOException ex) {
+	    Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+	}
+    }
+
     public Tile[][] getBoardLayout() {
 	return board;
+    }
+
+    public Tile[][] getEnemyBoardLayout() {
+	return enemyBoard;
+    }
+    
+    public boolean isTurn(){
+	return isTurn;
+    }
+    
+    public void setIsTurn(boolean state){
+	this.isTurn = state;
+    }
+    
+    public DataOutputStream getOutputStream(){
+	return dOut;
     }
 
 }

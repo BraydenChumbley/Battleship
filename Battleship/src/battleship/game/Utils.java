@@ -8,13 +8,14 @@ package battleship.game;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.text.BadLocationException;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
 
 /**
  *
@@ -40,6 +41,17 @@ public class Utils {
         g.setFont(font);
         // Draw the String
         g.drawString(text, x, y);
+    }
+    
+    public static Rectangle getCenteredStringBounds(JLabel lbl, String text, Rectangle rect, Font font) {
+	// Get the FontMetrics
+	FontMetrics metrics = lbl.getFontMetrics(font);
+	// Determine the X coordinate for the text
+	int x = (rect.width - metrics.stringWidth(text)) / 2;
+	// Determine the Y coordinate for the text (note we add the ascent, as in java 2d 0 is top of the screen)
+	int y = (rect.height - metrics.getHeight()) / 2;
+	
+	return new Rectangle(x,y, metrics.stringWidth(text), metrics.getHeight());
     }
 
     /**
@@ -126,6 +138,36 @@ public class Utils {
                 }
             }
         }
+    }
+    
+    public static void sendBoard(Tile[][] board, DataOutputStream out){
+	for(int x = 0; x < 10; x++){
+	    for(int y = 0; y < 10; y++){
+		try {
+		    out.writeInt(x);
+		    out.writeInt(y);
+		    out.writeBoolean(board[x][y].isOccupiedEh());
+		} catch (IOException ex) {
+		    Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	    }
+	}
+    }
+    
+    public static Tile[][] receiveBoard(DataInputStream in){
+	Tile[][] board = new Tile[10][10];
+	for(int x = 0; x < 10; x++){
+	    for(int y = 0; y < 10; y++){
+		try {
+		    board[x][y] = new Tile(in.readInt(), in.readInt());
+		    board[x][y].setOccupiedEh(in.readBoolean());
+		} catch (IOException ex) {
+		    Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	    }
+	}
+	System.out.println(Arrays.toString(board[0]));
+	return board;
     }
 
 }

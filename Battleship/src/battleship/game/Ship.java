@@ -14,6 +14,7 @@ public class Ship extends AbstractGameObject {
     
     private int size;
     private boolean xAlignedEh;
+    private boolean isdrawn;
     
     
     /**
@@ -25,6 +26,7 @@ public class Ship extends AbstractGameObject {
     public Ship(Coordinate coord, int size, boolean xAlignedEh){
 	this.size = size;
 	this.xAlignedEh = xAlignedEh;
+	this.isdrawn = true;
 	pos = coord;
 	//t.setOccupiedEh(true);
     }
@@ -44,6 +46,9 @@ public class Ship extends AbstractGameObject {
      */
     @Override
     public void draw(Graphics g) {
+	
+	if(!isdrawn) return;
+	
 	g.setColor(Color.YELLOW); //The ship will be yellow
 	for(int i = 0; i < size; i++){
 	    Coordinate tempCoord = new Coordinate(pos.getAbsX() + i * (xAlignedEh? 1 : 0), pos.getAbsY() + i * (xAlignedEh? 0 : 1));
@@ -81,6 +86,10 @@ public class Ship extends AbstractGameObject {
      */
     public void setxAlignedEh(boolean xAlignedEh) {
 	this.xAlignedEh = xAlignedEh;
+    }
+    
+    public void setIsDrawn(boolean isdrawn){
+	this.isdrawn = isdrawn;
     }
     
 }

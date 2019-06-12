@@ -6,12 +6,11 @@
 
 package battleship.game;
 
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Image;
-import java.io.File;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -38,6 +37,7 @@ public final class Window extends JFrame{
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setResizable(false);
 	setLocationRelativeTo(null);
+
 	add(game); //Add game to the window
 	setVisible(true); //Make the window visible
 	game.start(); //Start the game
